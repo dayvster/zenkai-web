@@ -138,7 +138,7 @@ function normalizeString(path, allowAboveRoot) {
 const isAbsolute = function(p2) {
   return _IS_ABSOLUTE_RE.test(p2);
 };
-const clientViteManifest = { "_Counter-CWIoMshG.css": { "file": "_build/assets/Counter-CWIoMshG.css", "src": "_Counter-CWIoMshG.css" }, "_Counter-Dl8JEiVM.js": { "file": "_build/assets/Counter-Dl8JEiVM.js", "name": "Counter", "imports": ["_web-B8orb__y.js"], "css": ["_build/assets/Counter-CWIoMshG.css"] }, "_HttpStatusCode-DjTx85av.js": { "file": "_build/assets/HttpStatusCode-DjTx85av.js", "name": "HttpStatusCode" }, "_index-uXDA-Q5V.js": { "file": "_build/assets/index-uXDA-Q5V.js", "name": "index", "imports": ["_web-B8orb__y.js"] }, "_routing-CTc8xigI.js": { "file": "_build/assets/routing-CTc8xigI.js", "name": "routing", "imports": ["_web-B8orb__y.js"] }, "_web-B8orb__y.js": { "file": "_build/assets/web-B8orb__y.js", "name": "web" }, "src/entry-client.tsx": { "file": "_build/assets/entry-client-CZdyqLFk.js", "name": "entry-client", "src": "src/entry-client.tsx", "isEntry": true, "imports": ["_web-B8orb__y.js", "_routing-CTc8xigI.js", "_HttpStatusCode-DjTx85av.js"], "dynamicImports": ["src/routes/[...404].mdx?pick=$css", "src/routes/[...404].mdx?pick=$css", "src/routes/about.mdx?pick=$css", "src/routes/about.mdx?pick=$css", "src/routes/index.mdx?pick=$css", "src/routes/index.mdx?pick=$css", "src/routes/blog/[slug].mdx?pick=$css", "src/routes/blog/[slug].mdx?pick=$css", "src/routes/blog/index.mdx?pick=$css", "src/routes/blog/index.mdx?pick=$css"], "css": ["_build/assets/entry-client-CtCnTOSY.css"] }, "src/routes/[...404].mdx?pick=$css": { "file": "_build/assets/_...404_-DmMnhpN3.js", "name": "_...404_", "src": "src/routes/[...404].mdx?pick=$css", "isEntry": true, "isDynamicEntry": true, "imports": ["_index-uXDA-Q5V.js", "_web-B8orb__y.js", "_HttpStatusCode-DjTx85av.js"] }, "src/routes/about.mdx?pick=$css": { "file": "_build/assets/about-C9J0Etbp.js", "name": "about", "src": "src/routes/about.mdx?pick=$css", "isEntry": true, "isDynamicEntry": true, "imports": ["_index-uXDA-Q5V.js", "_Counter-Dl8JEiVM.js", "_web-B8orb__y.js"] }, "src/routes/blog/[slug].mdx?pick=$css": { "file": "_build/assets/_slug_-4OpzJ1yM.js", "name": "_slug_", "src": "src/routes/blog/[slug].mdx?pick=$css", "isEntry": true, "isDynamicEntry": true, "imports": ["_web-B8orb__y.js", "_index-uXDA-Q5V.js", "_routing-CTc8xigI.js"] }, "src/routes/blog/index.mdx?pick=$css": { "file": "_build/assets/index-DVwu6zto.js", "name": "index", "src": "src/routes/blog/index.mdx?pick=$css", "isEntry": true, "isDynamicEntry": true, "imports": ["_web-B8orb__y.js", "_index-uXDA-Q5V.js"] }, "src/routes/index.mdx?pick=$css": { "file": "_build/assets/index-BF1xP0Ao.js", "name": "index", "src": "src/routes/index.mdx?pick=$css", "isEntry": true, "isDynamicEntry": true, "imports": ["_web-B8orb__y.js", "_index-uXDA-Q5V.js", "_Counter-Dl8JEiVM.js"] } };
+const clientViteManifest = { "_HttpStatusCode-DjTx85av.js": { "file": "_build/assets/HttpStatusCode-DjTx85av.js", "name": "HttpStatusCode" }, "_index-hvg0EY8G.js": { "file": "_build/assets/index-hvg0EY8G.js", "name": "index", "imports": ["_web-BFJjNbC1.js"] }, "_routing-CGC7zva5.js": { "file": "_build/assets/routing-CGC7zva5.js", "name": "routing", "imports": ["_web-BFJjNbC1.js"] }, "_web-BFJjNbC1.js": { "file": "_build/assets/web-BFJjNbC1.js", "name": "web" }, "src/entry-client.tsx": { "file": "_build/assets/entry-client-CVNfnuRQ.js", "name": "entry-client", "src": "src/entry-client.tsx", "isEntry": true, "imports": ["_web-BFJjNbC1.js", "_routing-CGC7zva5.js", "_HttpStatusCode-DjTx85av.js"], "dynamicImports": ["src/routes/[...404].mdx?pick=$css", "src/routes/[...404].mdx?pick=$css", "src/routes/about.mdx?pick=$css", "src/routes/about.mdx?pick=$css", "src/routes/index.tsx?pick=default&pick=$css", "src/routes/index.tsx?pick=default&pick=$css", "src/routes/blog/[slug].mdx?pick=$css", "src/routes/blog/[slug].mdx?pick=$css", "src/routes/blog/index.mdx?pick=$css", "src/routes/blog/index.mdx?pick=$css"], "css": ["_build/assets/entry-client-BNEaEPeH.css"] }, "src/routes/[...404].mdx?pick=$css": { "file": "_build/assets/_...404_-CRAWfZ_W.js", "name": "_...404_", "src": "src/routes/[...404].mdx?pick=$css", "isEntry": true, "isDynamicEntry": true, "imports": ["_index-hvg0EY8G.js", "_web-BFJjNbC1.js", "_HttpStatusCode-DjTx85av.js"] }, "src/routes/about.mdx?pick=$css": { "file": "_build/assets/about-CLn_g2hN.js", "name": "about", "src": "src/routes/about.mdx?pick=$css", "isEntry": true, "isDynamicEntry": true, "imports": ["_index-hvg0EY8G.js", "_web-BFJjNbC1.js"], "css": ["_build/assets/about-CWIoMshG.css"] }, "src/routes/blog/[slug].mdx?pick=$css": { "file": "_build/assets/_slug_-C5qa0nvb.js", "name": "_slug_", "src": "src/routes/blog/[slug].mdx?pick=$css", "isEntry": true, "isDynamicEntry": true, "imports": ["_web-BFJjNbC1.js", "_index-hvg0EY8G.js", "_routing-CGC7zva5.js"] }, "src/routes/blog/index.mdx?pick=$css": { "file": "_build/assets/index-BCJRrk1T.js", "name": "index", "src": "src/routes/blog/index.mdx?pick=$css", "isEntry": true, "isDynamicEntry": true, "imports": ["_web-BFJjNbC1.js", "_index-hvg0EY8G.js"] }, "src/routes/index.tsx?pick=default&pick=$css": { "file": "_build/assets/index-Bv0rQuI4.js", "name": "index", "src": "src/routes/index.tsx?pick=default&pick=$css", "isEntry": true, "isDynamicEntry": true, "imports": ["_web-BFJjNbC1.js"] } };
 function getSsrProdManifest() {
   const viteManifest = clientViteManifest;
   return {
@@ -1253,22 +1253,22 @@ function Router(props) {
 }
 const fileRoutes = [{ "page": true, "$component": { "src": "src/routes/[...404].mdx?pick=$css", "build": () => import(
   /* @vite-ignore */
-  '../_/_...404_-CVBCbfcH.mjs'
+  '../_/_...404_-Dwi2af-n.mjs'
 ), "import": () => import(
   /* @vite-ignore */
-  '../_/_...404_-CVBCbfcH.mjs'
+  '../_/_...404_-Dwi2af-n.mjs'
 ) }, "path": "/*404" }, { "page": true, "$component": { "src": "src/routes/about.mdx?pick=$css", "build": () => import(
   /* @vite-ignore */
-  '../_/about-B0OVwuwb.mjs'
+  '../_/about-a1dqiAiD.mjs'
 ), "import": () => import(
   /* @vite-ignore */
-  '../_/about-B0OVwuwb.mjs'
-) }, "path": "/about" }, { "page": true, "$component": { "src": "src/routes/index.mdx?pick=$css", "build": () => import(
+  '../_/about-a1dqiAiD.mjs'
+) }, "path": "/about" }, { "page": true, "$component": { "src": "src/routes/index.tsx?pick=default&pick=$css", "build": () => import(
   /* @vite-ignore */
-  '../_/index-D3NZVW53.mjs'
+  '../_/index-C5_tp-NC.mjs'
 ), "import": () => import(
   /* @vite-ignore */
-  '../_/index-D3NZVW53.mjs'
+  '../_/index-C5_tp-NC.mjs'
 ) }, "path": "/" }, { "page": true, "$component": { "src": "src/routes/blog/[slug].mdx?pick=$css", "build": () => import(
   /* @vite-ignore */
   '../_/_slug_-DdwPG8hk.mjs'
@@ -1516,7 +1516,7 @@ function createRoutes() {
 }
 let routes;
 const FileRoutes = isServer ? () => getRequestEvent().routes : () => routes || (routes = createRoutes());
-var _tmpl$$3 = ["<main", '><nav class="mb-8 flex items-center justify-center gap-4 border-b border-gray-200 pb-4"><a href="/" class="text-sm font-medium text-gray-600 hover:text-black transition-colors">Home</a><a href="/about" class="text-sm font-medium text-gray-600 hover:text-black transition-colors">About</a><a href="/blog" class="text-sm font-medium text-gray-600 hover:text-black transition-colors">Blog</a></nav><!--$-->', "<!--/--></main>"];
+var _tmpl$$3 = ["<main", ' class="min-h-screen bg-base text-fg">', "</main>"];
 function App$1() {
   return createComponent(Router, {
     root: (props) => ssr(_tmpl$$3, ssrHydrationKey(), escape(createComponent(Suspense, {
