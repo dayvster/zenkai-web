@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap");
+@import "tailwindcss";
+
+@font-face {
+  font-family: "NerdFont";
+  src: url("https://cdn.jsdelivr.net/gh/ryanoasis/nerd-fonts@master/patched-fonts/NerdFontsSymbolsOnly/SymbolsNerdFont-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+
+.nf {
+  font-family: "NerdFont", sans-serif;
+}
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-base: var(--theme-base, #0B0E14);
+  --color-base-50: var(--theme-base-50, #5C6166);
+  --color-base-100: var(--theme-base-100, #4A4F55);
+  --color-base-200: var(--theme-base-200, #3D4248);
+  --color-base-300: var(--theme-base-300, #2D3238);
+  --color-base-400: var(--theme-base-400, #1F2430);
+  --color-base-500: var(--theme-base-500, #151A24);
+  --color-base-600: var(--theme-base-600, #0B0E14);
+  --color-bg: var(--theme-bg, #1F2430);
+  --color-bg-hover: var(--theme-bg-hover, #273747);
+  --color-bg-active: var(--theme-bg-active, #2D3D4F);
+  --color-bg-elevated: var(--theme-bg-elevated, #1A1F2A);
+  --color-chip: var(--theme-chip, #2D3238);
+  --color-fg: var(--theme-fg, #B3B1AD);
+  --color-fg-secondary: var(--theme-fg-secondary, #8A8A8A);
+  --color-muted: var(--theme-muted, #5C6166);
+  --color-primary: var(--theme-primary, #95E6CB);
+  --color-primary-100: var(--theme-primary-100, #B3F0E3);
+  --color-primary-200: var(--theme-primary-200, #95E6CB);
+  --color-primary-300: var(--theme-primary-300, #7DCCB4);
+  --color-primary-fg: var(--theme-primary-fg, #0B0E14);
+  --color-secondary: var(--theme-secondary, #D4BFFF);
+  --color-secondary-100: var(--theme-secondary-100, #E6D9FF);
+  --color-secondary-200: var(--theme-secondary-200, #D4BFFF);
+  --color-secondary-300: var(--theme-secondary-300, #BFA8E6);
+  --color-accent: var(--theme-accent, #FFAD66);
+  --color-success: var(--theme-success, #ABF8D2);
+  --color-warning: var(--theme-warning, #FFD173);
+  --color-error: var(--theme-error, #FF3333);
+  --color-info: var(--theme-info, #95E6CB);
+  --color-border: var(--theme-border, #1F2430);
+  --color-border-100: var(--theme-border-100, #2D3238);
+  --color-border-200: var(--theme-border-200, #1F2430);
+  --color-border-300: var(--theme-border-300, #151A24);
+  --color-border-primary: var(--theme-border-primary, #2bd8ff);
+  --color-border-primary-muted: var(--theme-border-primary-muted, #e3903cce);
+  --color-ring: var(--theme-ring, #95E6CB);
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+:root,
+[data-theme="dark"] {
+  --theme-base: #0B0E14;
+  --theme-base-50: #5C6166;
+  --theme-base-100: #4A4F55;
+  --theme-base-200: #3D4248;
+  --theme-base-300: #2D3238;
+  --theme-base-400: #1F2430;
+  --theme-base-500: #151A24;
+  --theme-base-600: #0B0E14;
+  --theme-bg: #1F2430;
+  --theme-bg-hover: #273747;
+  --theme-bg-active: #2D3D4F;
+  --theme-bg-elevated: #1A1F2A;
+  --theme-chip: #2D3238;
+  --theme-fg: #B3B1AD;
+  --theme-fg-secondary: #8A8A8A;
+  --theme-muted: #5C6166;
+  --theme-primary: #fe9132;
+  --theme-primary-100: #ffa14fc0;
+  --theme-primary-200: #fda31b;
+  --theme-primary-300: #cc8616;
+  --theme-primary-fg: #0B0E14;
+  --theme-secondary: #D4BFFF;
+  --theme-secondary-100: #E6D9FF;
+  --theme-secondary-200: #D4BFFF;
+  --theme-secondary-300: #BFA8E6;
+  --theme-accent: #FFAD66;
+  --theme-success: #ABF8D2;
+  --theme-warning: #FFD173;
+  --theme-error: #FF3333;
+  --theme-info: #95E6CB;
+  --theme-border: #1F2430;
+  --theme-border-100: #2D3238;
+  --theme-border-200: #1F2430;
+  --theme-border-300: #151A24;
+  --theme-border-primary: #f39132;
+  --theme-border-primary-muted: #f38d2740;
+  --theme-ring: #95E6CB;
+}
