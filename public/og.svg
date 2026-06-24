@@ -1,0 +1,9 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#0B0E14"/>
+  <circle cx="600" cy="315" r="400" fill="#fe9132" opacity="0.03"/>
+  <circle cx="600" cy="315" r="250" fill="#fe9132" opacity="0.06"/>
+  <circle cx="600" cy="315" r="120" fill="#fe9132" opacity="0.1"/>
+  <text x="600" y="270" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="96" font-weight="900" fill="#fe9132" letter-spacing="-2">Zenkai</text>
+  <text x="600" y="340" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="36" font-weight="600" fill="#B3B1AD">Fast &amp; Performant App Launcher</text>
+  <text x="600" y="390" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="24" font-weight="500" fill="#5C6166">Built with Zig</text>
+</svg>
