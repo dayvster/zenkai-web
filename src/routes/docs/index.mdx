@@ -1,0 +1,62 @@
+import DocsLayout from "~/layouts/DocsLayout";
+import { Table, Th, Td, TdDesc } from "~/components/Table";
+
+<DocsLayout>
+
+# Overview
+
+Zenkai is a fast app launcher for Linux and macOS written in **Zig** with **Qt6**. It scans .desktop files and filters through them with instant fuzzy matching.
+
+## What is Zenkai?
+
+A fast app launcher for Linux. Written in Zig with Qt6.
+
+It scans your .desktop files from the usual places, shows you everything in a searchable list, and lets you filter through it as you type with fuzzy matching.
+
+## Key Features
+
+- **Fuzzy Search** - Type a few characters and find any application instantly
+- **65+ Themes** - Full visual customization via Qt stylesheets
+- **Lua Plugin System** - Extend with Lua scripts via on_query/on_open hooks
+- **Desktop Actions** - Parse [Desktop Action] entries from .desktop files
+- **Desktop Scanning** - Automatic indexing of all XDG directories
+- **Icon Grid View** - Fullscreen icon grid layout with launchpad theme
+- **Full CLI Control** - 25+ command-line flags for every setting
+- **Translations** - Multi-language support with --language flag
+- **Theme Reloader** - Live QSS reloading for theme development
+- **Low Memory Mode** - 20-50MB with included zenkai.sh wrapper
+
+## Tech Stack
+
+<Table>
+  <tr>
+    <Th>Component</Th>
+    <Th>Technology</Th>
+  </tr>
+  <tr>
+    <Td>Language</Td>
+    <TdDesc>Zig</TdDesc>
+  </tr>
+  <tr>
+    <Td>UI Framework</Td>
+    <TdDesc>Qt6 (Core, Gui, Widgets)</TdDesc>
+  </tr>
+  <tr>
+    <Td>Scripting</Td>
+    <TdDesc>Lua (via ziglua)</TdDesc>
+  </tr>
+  <tr>
+    <Td>Build System</Td>
+    <TdDesc>Zig Build</TdDesc>
+  </tr>
+  <tr>
+    <Td>Platforms</Td>
+    <TdDesc>Linux (X11/Wayland), macOS</TdDesc>
+  </tr>
+</Table>
+
+## Credits
+
+Built on [libqt6zig](https://github.com/rcalixte/libqt6zig) by [rcalixte](https://github.com/rcalixte) - Zig bindings for Qt6.
+
+</DocsLayout>

@@ -17,10 +17,12 @@ export const Readybar = (props: Props) => {
         responsiveness and balance between convenience and performance.
       </p>
       <div class="flex justify-center">
-      <Button variant="solid" class="cursor-pointer gap-2 text-black fill-black">
-        <Download />
-        DOWNLOAD ZENKAI
-      </Button>
+      <a href="https://github.com/dayvster/zenkai/releases" target="_blank">
+        <Button variant="solid" class="cursor-pointer gap-2 text-black fill-black">
+          <Download />
+          DOWNLOAD ZENKAI
+        </Button>
+      </a>
       </div>
     </Card>
   </>

@@ -1,0 +1,59 @@
+import DocsLayout from "~/layouts/DocsLayout";
+import { Table, Th, Td, TdDesc } from "~/components/Table";
+
+<DocsLayout>
+
+# Keyboard Shortcuts
+
+Navigate Zenkai entirely from the keyboard for maximum efficiency.
+
+## Basic Navigation
+
+<Table>
+  <tr>
+    <Th>Key</Th>
+    <Th>Action</Th>
+  </tr>
+  <tr>
+    <Td>`Type`</Td>
+    <TdDesc>Filter applications by name</TdDesc>
+  </tr>
+  <tr>
+    <Td>`Enter`</Td>
+    <TdDesc>Launch the selected application</TdDesc>
+  </tr>
+  <tr>
+    <Td>`Esc`</Td>
+    <TdDesc>Close Zenkai</TdDesc>
+  </tr>
+</Table>
+
+## List Navigation
+
+<Table>
+  <tr>
+    <Th>Key</Th>
+    <Th>Action</Th>
+  </tr>
+  <tr>
+    <Td>`Ctrl+N` / `Down`</Td>
+    <TdDesc>Select next item</TdDesc>
+  </tr>
+  <tr>
+    <Td>`Ctrl+P` / `Up`</Td>
+    <TdDesc>Select previous item</TdDesc>
+  </tr>
+  <tr>
+    <Td>`Ctrl+F`</Td>
+    <TdDesc>Focus search input</TdDesc>
+  </tr>
+</Table>
+
+## Tips
+
+- The search is fuzzy - you don't need to type the full name
+- Results are ranked by frequency - frequently used apps appear first
+- Use `--show-actions` to reveal [Desktop Action] entries on each item
+- Hook into `on_keypress(key)` in a Lua plugin to handle custom keyboard shortcuts
+
+</DocsLayout>

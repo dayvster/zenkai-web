@@ -33,7 +33,7 @@ const Terminal = () => (
       <span class="w-3 h-3 rounded-full bg-red-500" />
       <span class="w-3 h-3 rounded-full bg-yellow-500" />
       <span class="w-3 h-3 rounded-full bg-green-500" />
-      <span class="text-xs text-white/40 ml-2">zenkai@launcher — bash</span>
+      <span class="text-xs text-white/40 ml-2">zenkai@launcher - bash</span>
     </div>
     <div class="p-4">
       <div class="flex items-center gap-1.5">
@@ -45,7 +45,7 @@ const Terminal = () => (
         <span class="text-green-400 shrink-0">~ $</span>
         <span class="text-white">zenkai launch code</span>
       </div>
-      <div class="text-white/70 mt-1.5 ml-[1.125rem]">Visual Studio Code — <span class="text-green-400">62ms</span></div>
+      <div class="text-white/70 mt-1.5 ml-[1.125rem]">Visual Studio Code - <span class="text-green-400">62ms</span></div>
       <div class="flex items-center gap-1.5 mt-3">
         <span class="text-green-400 shrink-0">~ $</span>
         <span class="text-white">zenkai --plugin=calculator --no-dapps</span>

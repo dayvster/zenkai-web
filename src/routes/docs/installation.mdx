@@ -1,0 +1,73 @@
+import DocsLayout from "~/layouts/DocsLayout";
+
+<DocsLayout>
+
+# Installation
+
+Download the latest release from the [GitHub releases page](https://github.com/dayvster/zenkai/releases).
+
+## Requirements
+
+- **Zig 0.16.0** - the compiler and build system
+- **Qt 6.8.2 development libraries** (Core, Gui, Widgets)
+- **GCC or Clang** - for linking C++ code (Qt is written in C++)
+- **libstdc++ or libc++** - C++ standard library
+- **pkg-config** - helps find Qt headers and libraries
+
+### Zig
+
+Download the tarball for your architecture from [ziglang.org/download](https://ziglang.org/download/), extract it, and put the `zig` binary in your `PATH`.
+
+## Linux
+
+### Debian / Ubuntu / Mint
+
+```bash
+sudo apt install gcc libstdc++-14-dev-$(dpkg --print-architecture)-cross qt6-base-dev
+```
+
+### Fedora
+
+```bash
+sudo dnf install gcc libstdc++-devel qt6-qtbase-devel
+```
+
+### Arch
+
+```bash
+sudo pacman -S gcc qt6-base
+```
+
+### openSUSE
+
+```bash
+sudo zypper install qt6-base-devel
+```
+
+### FreeBSD
+
+```bash
+sudo pkg install qt6-base
+```
+
+## Build from Source
+
+```bash
+git clone https://github.com/dayvster/zenkai.git
+cd zenkai
+zig build
+```
+
+Binary at `zig-out/bin/zenkai`.
+
+Zig fetches the following automatically when you run `zig build`:
+- [libqt6zig](https://github.com/rcalixte/libqt6zig) - Zig bindings for Qt6
+- [ziglua](https://github.com/masterQ32/ziglua) - Zig bindings for Lua
+
+## Verify
+
+```bash
+./zig-out/bin/zenkai --help
+```
+
+</DocsLayout>

@@ -138,7 +138,7 @@ function normalizeString(path, allowAboveRoot) {
 const isAbsolute = function(p2) {
   return _IS_ABSOLUTE_RE.test(p2);
 };
-const clientViteManifest = { "_HttpStatusCode-DjTx85av.js": { "file": "_build/assets/HttpStatusCode-DjTx85av.js", "name": "HttpStatusCode" }, "_index-hvg0EY8G.js": { "file": "_build/assets/index-hvg0EY8G.js", "name": "index", "imports": ["_web-BFJjNbC1.js"] }, "_routing-CGC7zva5.js": { "file": "_build/assets/routing-CGC7zva5.js", "name": "routing", "imports": ["_web-BFJjNbC1.js"] }, "_web-BFJjNbC1.js": { "file": "_build/assets/web-BFJjNbC1.js", "name": "web" }, "src/entry-client.tsx": { "file": "_build/assets/entry-client-CYn_Kxzy.js", "name": "entry-client", "src": "src/entry-client.tsx", "isEntry": true, "imports": ["_web-BFJjNbC1.js", "_routing-CGC7zva5.js", "_HttpStatusCode-DjTx85av.js"], "dynamicImports": ["src/routes/[...404].mdx?pick=$css", "src/routes/[...404].mdx?pick=$css", "src/routes/about.mdx?pick=$css", "src/routes/about.mdx?pick=$css", "src/routes/index.tsx?pick=default&pick=$css", "src/routes/index.tsx?pick=default&pick=$css", "src/routes/blog/[slug].mdx?pick=$css", "src/routes/blog/[slug].mdx?pick=$css", "src/routes/blog/index.mdx?pick=$css", "src/routes/blog/index.mdx?pick=$css"], "css": ["_build/assets/entry-client-Bij-xHO7.css"] }, "src/routes/[...404].mdx?pick=$css": { "file": "_build/assets/_...404_-CRAWfZ_W.js", "name": "_...404_", "src": "src/routes/[...404].mdx?pick=$css", "isEntry": true, "isDynamicEntry": true, "imports": ["_index-hvg0EY8G.js", "_web-BFJjNbC1.js", "_HttpStatusCode-DjTx85av.js"] }, "src/routes/about.mdx?pick=$css": { "file": "_build/assets/about-CLn_g2hN.js", "name": "about", "src": "src/routes/about.mdx?pick=$css", "isEntry": true, "isDynamicEntry": true, "imports": ["_index-hvg0EY8G.js", "_web-BFJjNbC1.js"], "css": ["_build/assets/about-CWIoMshG.css"] }, "src/routes/blog/[slug].mdx?pick=$css": { "file": "_build/assets/_slug_-C5qa0nvb.js", "name": "_slug_", "src": "src/routes/blog/[slug].mdx?pick=$css", "isEntry": true, "isDynamicEntry": true, "imports": ["_web-BFJjNbC1.js", "_index-hvg0EY8G.js", "_routing-CGC7zva5.js"] }, "src/routes/blog/index.mdx?pick=$css": { "file": "_build/assets/index-BCJRrk1T.js", "name": "index", "src": "src/routes/blog/index.mdx?pick=$css", "isEntry": true, "isDynamicEntry": true, "imports": ["_web-BFJjNbC1.js", "_index-hvg0EY8G.js"] }, "src/routes/index.tsx?pick=default&pick=$css": { "file": "_build/assets/index-Bv0rQuI4.js", "name": "index", "src": "src/routes/index.tsx?pick=default&pick=$css", "isEntry": true, "isDynamicEntry": true, "imports": ["_web-BFJjNbC1.js"] } };
+const clientViteManifest = { "_Code-Dd_6JB_Q.js": { "file": "_build/assets/Code-Dd_6JB_Q.js", "name": "Code", "imports": ["_web-Doh1Atc5.js"] }, "_DocsLayout-Cel1nFu-.js": { "file": "_build/assets/DocsLayout-Cel1nFu-.js", "name": "DocsLayout", "imports": ["_web-Doh1Atc5.js", "_MainLayout-DG1FB1TJ.js", "_routing-DHy42hVb.js"] }, "_HttpStatusCode-DjTx85av.js": { "file": "_build/assets/HttpStatusCode-DjTx85av.js", "name": "HttpStatusCode" }, "_MainLayout-DG1FB1TJ.js": { "file": "_build/assets/MainLayout-DG1FB1TJ.js", "name": "MainLayout", "imports": ["_web-Doh1Atc5.js"] }, "_index-UaMrksoR.js": { "file": "_build/assets/index-UaMrksoR.js", "name": "index", "imports": ["_web-Doh1Atc5.js"] }, "_routing-DHy42hVb.js": { "file": "_build/assets/routing-DHy42hVb.js", "name": "routing", "imports": ["_web-Doh1Atc5.js"] }, "_web-Doh1Atc5.js": { "file": "_build/assets/web-Doh1Atc5.js", "name": "web" }, "src/entry-client.tsx": { "file": "_build/assets/entry-client-BbDAn8eU.js", "name": "entry-client", "src": "src/entry-client.tsx", "isEntry": true, "imports": ["_web-Doh1Atc5.js", "_routing-DHy42hVb.js", "_HttpStatusCode-DjTx85av.js"], "dynamicImports": ["src/routes/[...404].mdx?pick=$css", "src/routes/[...404].mdx?pick=$css", "src/routes/about.mdx?pick=$css", "src/routes/about.mdx?pick=$css", "src/routes/features.tsx?pick=default&pick=$css", "src/routes/features.tsx?pick=default&pick=$css", "src/routes/index.tsx?pick=default&pick=$css", "src/routes/index.tsx?pick=default&pick=$css", "src/routes/blog/[slug].mdx?pick=$css", "src/routes/blog/[slug].mdx?pick=$css", "src/routes/blog/index.mdx?pick=$css", "src/routes/blog/index.mdx?pick=$css", "src/routes/docs/cli.mdx?pick=$css", "src/routes/docs/cli.mdx?pick=$css", "src/routes/docs/index.mdx?pick=$css", "src/routes/docs/index.mdx?pick=$css", "src/routes/docs/installation.mdx?pick=$css", "src/routes/docs/installation.mdx?pick=$css", "src/routes/docs/plugins.mdx?pick=$css", "src/routes/docs/plugins.mdx?pick=$css", "src/routes/docs/shortcuts.mdx?pick=$css", "src/routes/docs/shortcuts.mdx?pick=$css", "src/routes/docs/themes.tsx?pick=default&pick=$css", "src/routes/docs/themes.tsx?pick=default&pick=$css", "src/routes/docs/usage.mdx?pick=$css", "src/routes/docs/usage.mdx?pick=$css"], "css": ["_build/assets/entry-client-BR1pAabI.css"] }, "src/routes/[...404].mdx?pick=$css": { "file": "_build/assets/_...404_-BAZWIYUy.js", "name": "_...404_", "src": "src/routes/[...404].mdx?pick=$css", "isEntry": true, "isDynamicEntry": true, "imports": ["_index-UaMrksoR.js", "_web-Doh1Atc5.js", "_HttpStatusCode-DjTx85av.js"] }, "src/routes/about.mdx?pick=$css": { "file": "_build/assets/about-CVxFJxNk.js", "name": "about", "src": "src/routes/about.mdx?pick=$css", "isEntry": true, "isDynamicEntry": true, "imports": ["_index-UaMrksoR.js", "_web-Doh1Atc5.js"], "css": ["_build/assets/about-CWIoMshG.css"] }, "src/routes/blog/[slug].mdx?pick=$css": { "file": "_build/assets/_slug_-BKlYts6C.js", "name": "_slug_", "src": "src/routes/blog/[slug].mdx?pick=$css", "isEntry": true, "isDynamicEntry": true, "imports": ["_web-Doh1Atc5.js", "_index-UaMrksoR.js", "_routing-DHy42hVb.js"] }, "src/routes/blog/index.mdx?pick=$css": { "file": "_build/assets/index-PPWiRQfC.js", "name": "index", "src": "src/routes/blog/index.mdx?pick=$css", "isEntry": true, "isDynamicEntry": true, "imports": ["_web-Doh1Atc5.js", "_index-UaMrksoR.js"] }, "src/routes/docs/cli.mdx?pick=$css": { "file": "_build/assets/cli-CknqSHTV.js", "name": "cli", "src": "src/routes/docs/cli.mdx?pick=$css", "isEntry": true, "isDynamicEntry": true, "imports": ["_web-Doh1Atc5.js", "_index-UaMrksoR.js", "_DocsLayout-Cel1nFu-.js", "_MainLayout-DG1FB1TJ.js", "_routing-DHy42hVb.js"] }, "src/routes/docs/index.mdx?pick=$css": { "file": "_build/assets/index-CMh-Y7rb.js", "name": "index", "src": "src/routes/docs/index.mdx?pick=$css", "isEntry": true, "isDynamicEntry": true, "imports": ["_index-UaMrksoR.js", "_DocsLayout-Cel1nFu-.js", "_web-Doh1Atc5.js", "_MainLayout-DG1FB1TJ.js", "_routing-DHy42hVb.js"] }, "src/routes/docs/installation.mdx?pick=$css": { "file": "_build/assets/installation-vAS0KMaj.js", "name": "installation", "src": "src/routes/docs/installation.mdx?pick=$css", "isEntry": true, "isDynamicEntry": true, "imports": ["_index-UaMrksoR.js", "_DocsLayout-Cel1nFu-.js", "_web-Doh1Atc5.js", "_MainLayout-DG1FB1TJ.js", "_routing-DHy42hVb.js"] }, "src/routes/docs/plugins.mdx?pick=$css": { "file": "_build/assets/plugins-BZ0Cfzg4.js", "name": "plugins", "src": "src/routes/docs/plugins.mdx?pick=$css", "isEntry": true, "isDynamicEntry": true, "imports": ["_index-UaMrksoR.js", "_DocsLayout-Cel1nFu-.js", "_web-Doh1Atc5.js", "_MainLayout-DG1FB1TJ.js", "_routing-DHy42hVb.js"] }, "src/routes/docs/shortcuts.mdx?pick=$css": { "file": "_build/assets/shortcuts-CwaeIf9t.js", "name": "shortcuts", "src": "src/routes/docs/shortcuts.mdx?pick=$css", "isEntry": true, "isDynamicEntry": true, "imports": ["_index-UaMrksoR.js", "_DocsLayout-Cel1nFu-.js", "_web-Doh1Atc5.js", "_MainLayout-DG1FB1TJ.js", "_routing-DHy42hVb.js"] }, "src/routes/docs/themes.tsx?pick=default&pick=$css": { "file": "_build/assets/themes-CWmRANKS.js", "name": "themes", "src": "src/routes/docs/themes.tsx?pick=default&pick=$css", "isEntry": true, "isDynamicEntry": true, "imports": ["_web-Doh1Atc5.js", "_DocsLayout-Cel1nFu-.js", "_MainLayout-DG1FB1TJ.js", "_routing-DHy42hVb.js"] }, "src/routes/docs/usage.mdx?pick=$css": { "file": "_build/assets/usage-Di88mME_.js", "name": "usage", "src": "src/routes/docs/usage.mdx?pick=$css", "isEntry": true, "isDynamicEntry": true, "imports": ["_index-UaMrksoR.js", "_DocsLayout-Cel1nFu-.js", "_web-Doh1Atc5.js", "_MainLayout-DG1FB1TJ.js", "_routing-DHy42hVb.js"] }, "src/routes/features.tsx?pick=default&pick=$css": { "file": "_build/assets/features-beBuHDsU.js", "name": "features", "src": "src/routes/features.tsx?pick=default&pick=$css", "isEntry": true, "isDynamicEntry": true, "imports": ["_web-Doh1Atc5.js", "_MainLayout-DG1FB1TJ.js", "_Code-Dd_6JB_Q.js"] }, "src/routes/index.tsx?pick=default&pick=$css": { "file": "_build/assets/index-Akym7eou.js", "name": "index", "src": "src/routes/index.tsx?pick=default&pick=$css", "isEntry": true, "isDynamicEntry": true, "imports": ["_web-Doh1Atc5.js", "_MainLayout-DG1FB1TJ.js", "_Code-Dd_6JB_Q.js"] } };
 function getSsrProdManifest() {
   const viteManifest = clientViteManifest;
   return {
@@ -545,6 +545,7 @@ const MAX_REDIRECTS = 100;
 const RouterContextObj = createContext();
 const RouteContextObj = createContext();
 const useRouter = () => invariant(useContext(RouterContextObj), "<A> and 'use' router primitives can be only used inside a Route.");
+const useLocation = () => useRouter().location;
 const useParams = () => useRouter().params;
 function createRoutes$1(routeDef, base = "") {
   const {
@@ -1263,12 +1264,18 @@ const fileRoutes = [{ "page": true, "$component": { "src": "src/routes/[...404].
 ), "import": () => import(
   /* @vite-ignore */
   '../_/about-a1dqiAiD.mjs'
-) }, "path": "/about" }, { "page": true, "$component": { "src": "src/routes/index.tsx?pick=default&pick=$css", "build": () => import(
+) }, "path": "/about" }, { "page": true, "$component": { "src": "src/routes/features.tsx?pick=default&pick=$css", "build": () => import(
   /* @vite-ignore */
-  '../_/index-C5_tp-NC.mjs'
+  '../_/features-DUi_FucZ.mjs'
 ), "import": () => import(
   /* @vite-ignore */
-  '../_/index-C5_tp-NC.mjs'
+  '../_/features-DUi_FucZ.mjs'
+) }, "path": "/features" }, { "page": true, "$component": { "src": "src/routes/index.tsx?pick=default&pick=$css", "build": () => import(
+  /* @vite-ignore */
+  '../_/index-KasOhNQF.mjs'
+), "import": () => import(
+  /* @vite-ignore */
+  '../_/index-KasOhNQF.mjs'
 ) }, "path": "/" }, { "page": true, "$component": { "src": "src/routes/blog/[slug].mdx?pick=$css", "build": () => import(
   /* @vite-ignore */
   '../_/_slug_-DdwPG8hk.mjs'
@@ -1281,7 +1288,49 @@ const fileRoutes = [{ "page": true, "$component": { "src": "src/routes/[...404].
 ), "import": () => import(
   /* @vite-ignore */
   '../_/index-CBBaJshA.mjs'
-) }, "path": "/blog/" }];
+) }, "path": "/blog/" }, { "page": true, "$component": { "src": "src/routes/docs/cli.mdx?pick=$css", "build": () => import(
+  /* @vite-ignore */
+  '../_/cli-DbkQetQN.mjs'
+), "import": () => import(
+  /* @vite-ignore */
+  '../_/cli-DbkQetQN.mjs'
+) }, "path": "/docs/cli" }, { "page": true, "$component": { "src": "src/routes/docs/index.mdx?pick=$css", "build": () => import(
+  /* @vite-ignore */
+  '../_/index-iNZsv8nT.mjs'
+), "import": () => import(
+  /* @vite-ignore */
+  '../_/index-iNZsv8nT.mjs'
+) }, "path": "/docs/" }, { "page": true, "$component": { "src": "src/routes/docs/installation.mdx?pick=$css", "build": () => import(
+  /* @vite-ignore */
+  '../_/installation-CwK3sn5d.mjs'
+), "import": () => import(
+  /* @vite-ignore */
+  '../_/installation-CwK3sn5d.mjs'
+) }, "path": "/docs/installation" }, { "page": true, "$component": { "src": "src/routes/docs/plugins.mdx?pick=$css", "build": () => import(
+  /* @vite-ignore */
+  '../_/plugins-CKV__MUV.mjs'
+), "import": () => import(
+  /* @vite-ignore */
+  '../_/plugins-CKV__MUV.mjs'
+) }, "path": "/docs/plugins" }, { "page": true, "$component": { "src": "src/routes/docs/shortcuts.mdx?pick=$css", "build": () => import(
+  /* @vite-ignore */
+  '../_/shortcuts-DC3DrjGl.mjs'
+), "import": () => import(
+  /* @vite-ignore */
+  '../_/shortcuts-DC3DrjGl.mjs'
+) }, "path": "/docs/shortcuts" }, { "page": true, "$component": { "src": "src/routes/docs/themes.tsx?pick=default&pick=$css", "build": () => import(
+  /* @vite-ignore */
+  '../_/themes-PGekF0Ec.mjs'
+), "import": () => import(
+  /* @vite-ignore */
+  '../_/themes-PGekF0Ec.mjs'
+) }, "path": "/docs/themes" }, { "page": true, "$component": { "src": "src/routes/docs/usage.mdx?pick=$css", "build": () => import(
+  /* @vite-ignore */
+  '../_/usage-CBAiHfc0.mjs'
+), "import": () => import(
+  /* @vite-ignore */
+  '../_/usage-CBAiHfc0.mjs'
+) }, "path": "/docs/usage" }];
 const NODE_TYPES = {
   NORMAL: 0,
   WILDCARD: 1,
@@ -5150,7 +5199,7 @@ function produceResponseWithEventHeaders(res) {
 function stripBaseUrl(path) {
   return path;
 }
-var _tmpl$ = ['<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><meta property="og:title" content="Zenkai"><meta property="og:description" content="Fast &amp; Performant App Launcher built with Zig. Scans .desktop files and filters through them with instant fuzzy matching."><meta property="og:image" content="/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Zenkai"><meta name="twitter:description" content="Fast &amp; Performant App Launcher built with Zig"><meta name="twitter:image" content="/og-image.png">', "</head>"], _tmpl$2 = ["<html", ' lang="en">', '<body><div id="app">', "</div><!--$-->", "<!--/--></body></html>"];
+var _tmpl$ = ['<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><title>Zenkai - Fast & Performant App Launcher</title><meta name="description" content="Fast &amp; Performant App Launcher built with Zig. Scans .desktop files and filters through them with instant fuzzy matching."><meta property="og:site_name" content="Zenkai"><meta property="og:title" content="Zenkai"><meta property="og:description" content="Fast &amp; Performant App Launcher built with Zig. Scans .desktop files and filters through them with instant fuzzy matching."><meta property="og:image" content="/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Zenkai"><meta name="twitter:description" content="Fast &amp; Performant App Launcher built with Zig"><meta name="twitter:image" content="/og-image.png">', "</head>"], _tmpl$2 = ["<html", ' lang="en">', '<body><div id="app">', "</div><!--$-->", "<!--/--></body></html>"];
 const entryServer = createHandler(() => createComponent(StartServer, {
   document: ({
     assets,
@@ -5170,5 +5219,5 @@ const entry$1 = /*#__PURE__*/Object.freeze({
   default: entry
 });
 
-export { HttpStatusCode as H, entry$1 as e, useParams as u };
+export { HttpStatusCode as H, useLocation as a, entry$1 as e, useParams as u };
 //# sourceMappingURL=entry.mjs.map

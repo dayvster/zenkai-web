@@ -12,7 +12,7 @@ export const NavItems: NavItem[] = [
   },
   {
     label: "Features",
-    href: "/#features",
+    href: "/features",
     icon: "features",
   },
   {
@@ -29,7 +29,7 @@ import { GitHub } from "./svgs/GitHub";
 export const Navi = () => {
   const title = "Zenkai";
   const mainIcon = "";
-  return <nav class="flex items-center gap-4 border-b border-border px-6 py-3">
+  return <nav class="sticky top-0 z-50 backdrop-blur-sm bg-base/80 flex items-center gap-4 border-b border-border px-6 py-3">
     <div class="flex items-center gap-4">
       <a href="/" class="font-bold text-primary transition-colors">
         <img src="imgs/logo.png" alt="Zenkai Logo" class="max-h-6" />

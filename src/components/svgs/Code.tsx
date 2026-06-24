@@ -11,7 +11,7 @@ export const Code = (props: Props) => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      fill="inherit"
+      fill="currentColor"
       class={local.class ?? ""}
       width={local.size ?? 20}
       height={local.size ?? 20}

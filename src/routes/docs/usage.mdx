@@ -1,0 +1,42 @@
+import DocsLayout from "~/layouts/DocsLayout";
+
+<DocsLayout>
+
+# Usage
+
+Launch Zenkai from your terminal or application menu:
+
+```bash
+zenkai
+```
+
+Start typing to filter through your applications. The results update instantly as you type. Press **Enter** to launch the selected application.
+
+## Basic Workflow
+
+1. Open Zenkai (via hotkey or terminal)
+2. Type part of the application name
+3. Results appear instantly with fuzzy matching
+4. Press **Enter** to launch, or **Esc** to close
+
+## Examples
+
+Launch with a specific theme:
+
+```bash
+zenkai --theme=catppuccin
+```
+
+Start in fullscreen mode on monitor 1:
+
+```bash
+zenkai --fullscreen --monitor=1
+```
+
+Add a custom menu entry:
+
+```bash
+zenkai --menu="Terminal|alacritty|terminal"
+```
+
+</DocsLayout>
