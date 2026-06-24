@@ -32,6 +32,7 @@ export const MainLayout = (props: Props) => {
                 <a href="https://github.com/dayvster/zenkai/releases" target="_blank" class="text-xs text-muted hover:text-primary transition-colors">Releases</a>
                 <a href="https://github.com/dayvster/zenkai/blob/main/CONTRIBUTING.md" target="_blank" class="text-xs text-muted hover:text-primary transition-colors">Contributing</a>
                 <a href="https://github.com/dayvster/zenkai/blob/main/LICENCE.md" target="_blank" class="text-xs text-muted hover:text-primary transition-colors">License</a>
+                <a href="https://dayvster.com" target="_blank" class="text-xs text-muted hover:text-primary transition-colors">dayvster.com</a>
               </div>
             </div>
             <div>
