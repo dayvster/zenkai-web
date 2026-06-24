@@ -27,7 +27,7 @@ export default defineConfig({
     nitro({
       preset: "static",
       prerender: {
-        routes: ["/blog/hello-tailwind", "/blog/ssg-with-solidstart"]
+        crawlLinks: true
       }
     })
   ]
