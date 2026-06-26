@@ -10,6 +10,7 @@ const pages = [
   { label: "Themes", href: "/docs/themes" },
   { label: "Plugins", href: "/docs/plugins" },
   { label: "Keyboard Shortcuts", href: "/docs/shortcuts" },
+  { label: "NVIDIA", href: "/docs/nvidia" },
 ];
 
 export type Props = {

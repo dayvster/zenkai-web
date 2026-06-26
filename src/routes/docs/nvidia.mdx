@@ -1,0 +1,49 @@
+import DocsLayout from "~/layouts/DocsLayout";
+import { Table, Th, Td, TdDesc } from "~/components/Table";
+import { CopyBlock } from "~/components/CopyBlock";
+
+<DocsLayout>
+
+# NVIDIA
+
+If you are using an **NVIDIA GPU**, set these environment variables before launching Zenkai to avoid rendering issues with Qt 6.
+
+## Flags
+
+<Table>
+  <tr>
+    <Th>Variable</Th>
+    <Th>Value</Th>
+    <Th>Purpose</Th>
+  </tr>
+  <tr>
+    <Td>`QT_STYLE_OVERRIDE`</Td>
+    <Td>`fusion`</Td>
+    <TdDesc>Forces the Fusion Qt style to avoid theme engine crashes on NVIDIA</TdDesc>
+  </tr>
+  <tr>
+    <Td>`QT_ACCESSIBILITY`</Td>
+    <Td>`0`</Td>
+    <TdDesc>Disables the Qt accessibility stack, which can cause slowdowns and crashes with the proprietary NVIDIA driver</TdDesc>
+  </tr>
+  <tr>
+    <Td>`__GLX_VENDOR_LIBRARY_NAME`</Td>
+    <Td>`none`</Td>
+    <TdDesc>Bypasses the NVIDIA GLX vendor library, preventing texture corruption and rendering glitches in Qt widgets</TdDesc>
+  </tr>
+</Table>
+
+## Usage
+
+<CopyBlock code={`export QT_STYLE_OVERRIDE=fusion
+export QT_ACCESSIBILITY=0
+export __GLX_VENDOR_LIBRARY_NAME=none
+zenkai`} />
+
+Or in one line:
+
+<CopyBlock code="env QT_STYLE_OVERRIDE=fusion QT_ACCESSIBILITY=0 __GLX_VENDOR_LIBRARY_NAME=none zenkai" style="font-size: 10px" />
+
+These flags are safe to use on non-NVIDIA systems as well - they are ignored by Mesa and other open-source drivers.
+
+</DocsLayout>
