@@ -8,7 +8,8 @@ export default createHandler(() => (
         <head>
           <meta charset="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link rel="icon" href="/favicon.ico" />
+          <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+          <link rel="alternate icon" href="/favicon.ico" />
           <title>Zenkai - Fast & Performant App Launcher</title>
           <meta name="description" content="Fast & Performant App Launcher built with Zig. Scans .desktop files and filters through them with instant fuzzy matching." />
           <meta property="og:site_name" content="Zenkai" />
