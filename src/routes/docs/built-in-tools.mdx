@@ -79,6 +79,37 @@ Type `snip:` to find a saved snippet by title or description. Enter copies its t
 
 Snippets live in `snippets.json` in the same config folder. Each one has a `title`, an optional `subtitle` and the `text`. Use `\n` for line breaks.
 
+## Emoji picker
+
+Type `:` and a name or keyword, or `emoji:` if you prefer, to search 1,898 emoji. Results show the emoji itself as the icon. Enter copies it and keeps Zenkai open; Ctrl+K also offers Copy Codepoints (like `U+1F525`).
+
+<img src="/imgs/screens/emoji.webp" alt="The emoji picker showing results for :fire" width="1200" height="1029" loading="lazy" class="w-full max-w-[560px] rounded-xl border border-border-100 my-6" />
+
+<Table>
+  <tr>
+    <Th>Type</Th>
+    <Th>Finds</Th>
+  </tr>
+  <tr>
+    <Td>`:fire`</Td>
+    <TdDesc>🔥 Fire, then firefighter, fire engine, fireworks…</TdDesc>
+  </tr>
+  <tr>
+    <Td>`:red heart`</Td>
+    <TdDesc>❤️ Red heart. Every word has to match.</TdDesc>
+  </tr>
+  <tr>
+    <Td>`:laugh`</Td>
+    <TdDesc>😂 🤣 😆 through Unicode's keywords, not just names</TdDesc>
+  </tr>
+  <tr>
+    <Td>`:`</Td>
+    <TdDesc>The smileys, to browse</TdDesc>
+  </tr>
+</Table>
+
+Names and keywords come from Unicode Emoji 15.1. Skin-tone variants aren't listed.
+
 ## URL suggestions
 
 Type something that looks like a URL, such as `github.com` or `localhost:3000`, and Zenkai offers to open it in your default browser, shown with that browser's icon. Bare domains open over HTTPS and `localhost` with a port over HTTP. Normal multi-word searches and email addresses are ignored.

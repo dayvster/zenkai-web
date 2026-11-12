@@ -73,6 +73,16 @@ const shots: Shot[] = [
     docs: { href: "/docs/built-in-tools", label: "Built-in tools" },
   },
   {
+    key: "emoji",
+    label: "Emoji",
+    title: "Every emoji, by name",
+    body: "Type a colon and a word to find the emoji you mean, shown as real icons. Search by name or by feeling: :laugh finds 😂 and :love finds ❤️. Enter copies it, ready to paste anywhere.",
+    points: ["1,898 emoji with Unicode keywords", "Copy the emoji or its codepoints", "No emoji keyboard to dig through"],
+    tryIt: ":fire",
+    keys: ["Enter to copy", "Ctrl+K"],
+    docs: { href: "/docs/built-in-tools", label: "Emoji picker" },
+  },
+  {
     key: "convert",
     label: "Conversions",
     title: "Units and currencies, no website needed",

@@ -176,6 +176,17 @@ const features = [
       },
       {
         icon: Bolt,
+        title: "Emoji Picker",
+        desc: "Type a colon and a word, like :fire or :laugh, to find any emoji by name or feeling. Enter copies it.",
+        details: [
+          "1,898 emoji with Unicode keywords",
+          "Shown as real icons",
+          "Copy the emoji or its codepoints",
+          "Works offline",
+        ],
+      },
+      {
+        icon: Bolt,
         title: "URL Suggestions",
         desc: "Type a domain like github.com and Zenkai offers to open it in your default browser, with that browser's icon.",
         details: [
