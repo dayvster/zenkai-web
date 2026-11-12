@@ -8,6 +8,7 @@ import { Code } from "@/components/svgs/Code";
 import { FeaturesSection } from "@/components/FeaturesSection";
 import { StatsSection } from "@/components/StatsSection";
 import { WindowSwitcherSection } from "@/components/WindowSwitcherSection";
+import { BrowserSection } from "@/components/BrowserSection";
 import { CopyBlock } from "~/components/CopyBlock";
 import CliFlags from "~/components/cliflags";
 import { ComingFrom } from "~/components/ComingFrom";
@@ -104,6 +105,10 @@ export default function Home() {
 
       <section class="mt-16 sm:mt-32 px-4 sm:px-6">
         <WindowSwitcherSection />
+      </section>
+
+      <section id="browser" class="mt-16 sm:mt-32 px-4 sm:px-6 scroll-mt-20">
+        <BrowserSection />
       </section>
 
       <section class="mt-16 sm:mt-32 px-4 sm:px-6">

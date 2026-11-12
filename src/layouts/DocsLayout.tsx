@@ -9,6 +9,7 @@ const pages = [
   { label: "Hotkey Setup", href: "/docs/hotkeys" },
   { label: "Keyboard Shortcuts", href: "/docs/shortcuts" },
   { label: "Window Switcher", href: "/docs/window-switcher" },
+  { label: "Browser Extension", href: "/docs/browser" },
   { label: "Files & Previews", href: "/docs/files" },
   { label: "Built-in Tools", href: "/docs/built-in-tools" },
   { label: "Configuration", href: "/docs/configuration" },

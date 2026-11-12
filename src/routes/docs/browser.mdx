@@ -1,0 +1,139 @@
+import DocsLayout from "~/layouts/DocsLayout";
+import { Table, Th, Td, TdDesc } from "~/components/Table";
+import { BrowserDemo } from "~/components/BrowserSection";
+
+<DocsLayout>
+
+# Browser Extension
+
+Zenkai's `browser` plugin finds, switches and manages your browser tabs, and searches your history and bookmarks. It works with every running browser at once, so tabs from Brave and Firefox show up in the same list.
+
+<div class="my-6 max-w-[720px]">
+  <BrowserDemo />
+</div>
+
+Browsers don't let other programs see their tabs, so this takes two small pieces from [zenkai-web-bridge](https://github.com/dayvster/zenkai-web-bridge):
+
+- **Zenkai Web**, an extension for Chromium-based browsers (Chrome, Brave, Edge, Vivaldi, Chromium) and Firefox
+- **`zenkai-web-bridge`**, a single binary. The browser starts it in the background through [native messaging](https://developer.chrome.com/docs/extensions/develop/concepts/native-messaging), and Zenkai calls the same binary to ask for tabs
+
+```
+Zenkai ─ browser plugin ─> zenkai-web-bridge ─ local socket ─> zenkai-web-bridge (host) ─> extension
+```
+
+Each running browser gets its own socket in `$XDG_RUNTIME_DIR/zenkai-web-bridge/`, readable only by your user.
+
+## Install
+
+The bridge runs on Linux for now. The extension itself is cross-platform; macOS and Windows ports of the bridge are still to come.
+
+Build the bridge with Zig and register it with your browsers:
+
+```bash
+git clone https://github.com/dayvster/zenkai-web-bridge
+cd zenkai-web-bridge
+zig build -Doptimize=ReleaseSmall
+cp zig-out/bin/zenkai-web-bridge ~/.local/bin/
+zenkai-web-bridge install
+```
+
+`install` writes a native messaging manifest for every browser it finds: Chrome, Chromium, Brave, Edge, Vivaldi and Firefox, including their beta and nightly channels.
+
+Then load the extension:
+
+- **Chromium-based:** open `chrome://extensions` (or `brave://extensions`, `edge://extensions`), turn on **Developer mode**, click **Load unpacked** and pick the `extension/` folder
+- **Firefox:** open `about:debugging#/runtime/this-firefox`, click **Load Temporary Add-on** and pick `zig-out/extension/firefox/manifest.json`
+
+Check that your browser is connected:
+
+```bash
+zenkai-web-bridge status
+```
+
+It prints one line per connected browser. `zenkai-web-bridge uninstall` removes the registrations again.
+
+### Zenkai can't find the bridge
+
+If Zenkai shows **Connect your browser** although `status` works in your terminal, Zenkai can't find `zenkai-web-bridge` in its `PATH`. This happens when your compositor starts Zenkai with a shorter `PATH` than your shell, which is common on Hyprland and Sway. Copy the binary to `/usr/local/bin`, or add `~/.local/bin` to your session's `PATH`.
+
+## Tabs
+
+<Table>
+  <tr>
+    <Th>Type</Th>
+    <Th>What happens</Th>
+  </tr>
+  <tr>
+    <Td>`tab:`</Td>
+    <TdDesc>Every open tab, most recently used first, plus New Tab, New Window, New Private Window, Reopen Closed Tab and Close Duplicate Tabs.</TdDesc>
+  </tr>
+  <tr>
+    <Td>`tab: docs`</Td>
+    <TdDesc>Tabs whose title or URL matches. **Enter** switches to the tab and brings its window to the front.</TdDesc>
+  </tr>
+  <tr>
+    <Td>`tab: github.com`</Td>
+    <TdDesc>Opens the address in a new tab. `https://` is added for you.</TdDesc>
+  </tr>
+</Table>
+
+Press **Ctrl+K** on a tab for its actions:
+
+- Close, Reload, Duplicate
+- Pin / Unpin, Mute / Unmute
+- Move to New Window, Close Other Tabs
+- Bookmark, Copy URL
+
+The tab list is fetched when you type `tab:` and filtered locally as you keep typing. Clear the search back to `tab:` to refresh it.
+
+## Bookmarks
+
+<Table>
+  <tr>
+    <Th>Type</Th>
+    <Th>What happens</Th>
+  </tr>
+  <tr>
+    <Td>`bm:`</Td>
+    <TdDesc>Recent bookmarks, plus Bookmark Current Tab and New Folder…</TdDesc>
+  </tr>
+  <tr>
+    <Td>`bm: zig`</Td>
+    <TdDesc>Bookmarks and folders whose title or URL matches, with the folder each one is in. **Enter** opens a page, or browses into a folder.</TdDesc>
+  </tr>
+</Table>
+
+**Ctrl+K** on a bookmark offers Open in New Window, Copy URL, Rename…, Move to Folder… and Delete…. On a folder you get Open All in Tabs, New Folder Here…, Rename…, Move to Folder… and Delete….
+
+A launcher has no forms, so edits happen in the search bar:
+
+- **Rename…** fills in `bm:rename REF = Current title`. Edit the title and press **Enter**
+- **Move to Folder…** lists your folders. Type to filter them and press **Enter** on the destination
+- **Delete…** asks you to confirm. Only empty folders can be deleted
+
+## History
+
+Type `hist:` followed by a word from a page's title or URL, then press **Enter** to open it.
+
+## Command line
+
+`zenkai-web-bridge` also works on its own, which is handy for scripts and other launchers:
+
+```bash
+zenkai-web-bridge tabs                    # target, browser, flags, title, url
+zenkai-web-bridge activate 4242:17        # switch to tab 17 of browser 4242
+zenkai-web-bridge close 4242:17           # also reload, duplicate, pin, mute, detach, bookmark, close-others
+zenkai-web-bridge open github.com         # open in a new tab
+zenkai-web-bridge new-window --private
+zenkai-web-bridge reopen                  # reopen the last closed tab
+zenkai-web-bridge history zig
+zenkai-web-bridge bookmarks zig
+```
+
+Commands that don't take a tab go to the browser given with `--browser PID`, or to the most recently started one. Run `zenkai-web-bridge` without arguments for the full list.
+
+## Privacy and permissions
+
+The extension asks for `tabs`, `history`, `bookmarks`, `sessions` (to reopen closed tabs) and `nativeMessaging`. It only talks to the bridge on your machine; nothing is sent anywhere else. URLs opened through it are limited to `http`, `https`, `ftp` and `about:`.
+
+</DocsLayout>
