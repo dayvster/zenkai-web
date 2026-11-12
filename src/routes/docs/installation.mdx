@@ -4,53 +4,70 @@ import DocsLayout from "~/layouts/DocsLayout";
 
 # Installation
 
-Download the latest release from the [GitHub releases page](https://github.com/dayvster/zenkai/releases).
+Grab a ready-made build from the [download section](/#download), or build it yourself.
+
+## Download a release
+
+Linux releases come as an **AppImage**, a **.deb** package, an **Arch** package and a plain tarball, for 64-bit and 32-bit x86:
+
+```bash
+# AppImage
+chmod +x zenkai-*-x86_64.AppImage && ./zenkai-*-x86_64.AppImage
+
+# Debian / Ubuntu
+sudo apt install ./zenkai_*_amd64.deb
+
+# Arch
+sudo pacman -U zenkai-*-x86_64.pkg.tar.zst
+```
+
+Windows and macOS don't have prebuilt releases yet, so build them from source as described below. Once installed, [set up a hotkey](/docs/hotkeys).
 
 ## Requirements
 
-- **Zig 0.16.0** - the compiler and build system
-- **Qt 6.8.2 development libraries** (Core, Gui, Widgets)
+- **Zig 0.17.0** - the compiler and build system
+- **Qt 6.8.2 development libraries** (Core, Gui, Widgets, Svg)
 - **GCC or Clang** - for linking C++ code (Qt is written in C++)
-- **libstdc++ or libc++** - C++ standard library
-- **pkg-config** - helps find Qt headers and libraries
+- **libstdc++ or libc++** - the C++ standard library, comes with your compiler
+- **pkg-config** - helps the build find Qt headers and libraries
 
 ### Zig
 
-Download the tarball for your architecture from [ziglang.org/download](https://ziglang.org/download/), extract it, and put the `zig` binary in your `PATH`.
+Download the tarball for your architecture from [ziglang.org/download](https://ziglang.org/download/), extract it and put the `zig` binary in your `PATH`. Most distro repositories lag behind, and 0.17.0 is required.
 
-## Linux
+## Linux and BSD packages
+
+### Arch
+
+```bash
+sudo pacman -S gcc qt6-base qt6-svg
+```
 
 ### Debian / Ubuntu / Mint
 
 ```bash
-sudo apt install gcc libstdc++-14-dev-$(dpkg --print-architecture)-cross qt6-base-dev
+sudo apt install gcc libstdc++-14-dev-$(dpkg --print-architecture)-cross qt6-base-dev libqt6svg6-dev
 ```
 
 ### Fedora
 
 ```bash
-sudo dnf install gcc libstdc++-devel qt6-qtbase-devel
-```
-
-### Arch
-
-```bash
-sudo pacman -S gcc qt6-base
+sudo dnf install gcc libstdc++-devel qt6-qtbase-devel qt6-qtsvg-devel
 ```
 
 ### openSUSE
 
 ```bash
-sudo zypper install qt6-base-devel
+sudo zypper install qt6-base-devel qt6-svg-devel
 ```
 
 ### FreeBSD
 
 ```bash
-sudo pkg install qt6-base
+sudo pkg install qt6-base qt6-svg
 ```
 
-## Build from Source
+## Build from source
 
 ```bash
 git clone https://github.com/dayvster/zenkai.git
@@ -58,13 +75,27 @@ cd zenkai
 zig build
 ```
 
-Binary at `zig-out/bin/zenkai`.
+The binary is at `zig-out/bin/zenkai`.
 
-Zig fetches the following automatically when you run `zig build`:
+Zig fetches these automatically during `zig build`:
+
 - [libqt6zig](https://github.com/rcalixte/libqt6zig) - Zig bindings for Qt6
-- [ziglua](https://github.com/masterQ32/ziglua) - Zig bindings for Lua
+- [ziglua](https://github.com/natecraddock/ziglua) - Zig bindings for Lua
+- [kwinctl](https://github.com/dayvster/kwinctl) - KDE Plasma 6 window control
 
-## Verify
+## Windows
+
+You need Zig 0.17.0 and a Qt 6.8 development install for the Windows target (the llvm-mingw build). The deploy step bundles the Qt and LLVM MinGW runtimes and the platform plugin next to the executable:
+
+```powershell
+zig build deploy-windows -Dtarget=x86_64-windows-gnu
+```
+
+The result is `zig-out/bin/zenkai.exe`, which runs without setting `PATH` or `QT_PLUGIN_PATH`. If Qt is installed somewhere other than `C:/Qt/6.8.3/llvm-mingw_64`, pass its root with `-Dqt-win-root=<path>`.
+
+On Windows, Zenkai finds apps through `.lnk` and `.url` shortcuts in your own and the shared Start Menu folders, and keeps its configuration in `%APPDATA%\zenkai`.
+
+## Check that it works
 
 ```bash
 ./zig-out/bin/zenkai --help

@@ -7,6 +7,10 @@ import { Plugin } from "~/components/svgs/Plugin";
 import { Palette } from "~/components/svgs/Palette";
 import { Folder } from "~/components/svgs/Folder";
 import { Code } from "~/components/svgs/Code";
+import { Window } from "~/components/svgs/Window";
+import { Keyboard } from "~/components/svgs/Keyboard";
+import { Calculator } from "~/components/svgs/Calculator";
+import { Bolt } from "~/components/svgs/Bolt";
 
 const features = [
   {
@@ -15,45 +19,170 @@ const features = [
       {
         icon: Search,
         title: "Fuzzy Search",
-        desc: "Type a few characters and instantly find any application across thousands of .desktop entries with smart ranking.",
+        desc: "Type a few characters and find any application instantly. Results are ranked as you type.",
         details: [
           "Instant filtering as you type",
-          "Smart frequency-based ranking",
           "Subsequence matching",
           "Thousands of entries in milliseconds",
-        ],
-      },
-      {
-        icon: Search,
-        title: "Desktop Actions",
-        desc: "Parse [Desktop Action ...] entries from .desktop files for actions like 'New Window' or 'New Private Window'.",
-        details: [
-          "Show actions in list with --show-actions",
-          "Show actions in bottom bar with --actions-bottombar",
-          "Supports any .desktop action entry",
-          "Deep integration with desktop files",
+          "Icons load only when rows are painted",
         ],
       },
       {
         icon: Folder,
-        title: "Desktop Scanning",
-        desc: "Automatically scans and indexes .desktop files across all standard XDG directories for complete application coverage.",
+        title: "App Discovery",
+        desc: "Finds apps wherever your platform keeps them: .desktop files on Linux and Start Menu shortcuts on Windows.",
         details: [
-          "XDG directory scanning",
-          "Automatic indexing",
-          "Complete app coverage",
+          "All standard XDG directories",
+          "Windows .lnk and .url shortcuts",
           "Skip scanning with --no-dapps",
+          "Add entries with --menu=name|cmd|icon",
         ],
       },
       {
-        icon: Search,
-        title: "Icon Grid View",
-        desc: "Fullscreen icon grid layout with pill-shaped search bar. Switch with --theme=launchpad --fullscreen for a launcher-style interface.",
+        icon: Code,
+        title: "Desktop Actions",
+        desc: "Shows [Desktop Action] entries such as New Window or New Private Window, in the list or in the bottom bar.",
         details: [
-          "Grid-based icon layout",
-          "Pill-shaped search bar",
-          "Fullscreen immersive mode",
-          "Great for touchscreens",
+          "--show-actions lists them",
+          "--actions-bottombar puts them in the footer",
+          "Ctrl+1 to Ctrl+0 run the first ten",
+          "Works with any .desktop action",
+        ],
+      },
+      {
+        icon: Code,
+        title: "Run Mode (Windows)",
+        desc: "Start with --run to type a command or URL and open it with the Windows shell, like Win+R.",
+        details: [
+          "No run: prefix needed",
+          "Commands and URLs",
+          "Uses the Windows shell",
+          "Lazy-loaded run: plugin",
+        ],
+      },
+    ],
+  },
+  {
+    section: "Windows & Layouts",
+    items: [
+      {
+        icon: Window,
+        title: "Window Switcher",
+        desc: "Type win: to list open windows with their app icons, filter by title or app and press Enter to focus one.",
+        details: [
+          "--window-switcher opens straight into it",
+          "Leaves Zenkai itself out of the list",
+          "Restores minimized windows",
+          "Disable with --no-window-switcher",
+        ],
+      },
+      {
+        icon: Window,
+        title: "Window Layouts",
+        desc: "Press Ctrl+K on a window to snap it to a half, maximize it, center it or move it to the next display.",
+        details: [
+          "Left, right, top and bottom halves",
+          "Maximize and center",
+          "Move to next display",
+          "Respects panels, docks and scaling",
+        ],
+      },
+      {
+        icon: Window,
+        title: "Every Major Desktop",
+        desc: "Native backends for Windows and macOS, plus KDE Plasma 6, Hyprland, Sway and any EWMH window manager on X11.",
+        details: [
+          "KDE Plasma 6 needs no extra tools",
+          "Hyprland via hyprctl, Sway via swaymsg",
+          "X11 via wmctrl and xrandr",
+          "macOS via Accessibility APIs",
+        ],
+      },
+    ],
+  },
+  {
+    section: "Files & Actions",
+    items: [
+      {
+        icon: Folder,
+        title: "File Browser & Search",
+        desc: "Type a path like ~/Documents to browse it, or file: report to search filenames under your home folder.",
+        details: [
+          "Folders first, paged in groups of 128",
+          "Incremental search, no index to build",
+          "Configurable roots and excludes",
+          "Windows and Unix style paths",
+        ],
+      },
+      {
+        icon: Folder,
+        title: "File Previews",
+        desc: "Turn on the preview pane with --file-previews or toggle it any time with Ctrl+P.",
+        details: [
+          "Text and code with syntax colors",
+          "Images up to 16 megapixels",
+          "Folder listings",
+          "No scripts or external viewers run",
+        ],
+      },
+      {
+        icon: Keyboard,
+        title: "Actions Menu",
+        desc: "Ctrl+K opens a searchable menu of actions for the selected result, from Copy Name to Move to Trash.",
+        details: [
+          "Reveal, rename, new file, new folder",
+          "Move to Trash with confirmation",
+          "Copy paths, URLs and window titles",
+          "New Window / Private Window for browsers",
+        ],
+      },
+    ],
+  },
+  {
+    section: "Built-in Tools",
+    items: [
+      {
+        icon: Calculator,
+        title: "Scientific Calculator",
+        desc: "Type an expression and the answer appears as the top result. Enter copies it.",
+        details: [
+          "sqrt, sin, log, min, max and more",
+          "Percentages like 15% of 80",
+          "Constants pi, tau and e",
+          "Works offline",
+        ],
+      },
+      {
+        icon: Calculator,
+        title: "Unit & Currency Conversion",
+        desc: "Convert length, mass, temperature, data sizes and more. Currencies use daily reference rates from Frankfurter.",
+        details: [
+          "100 cm to m, 32 f to c",
+          "2 GiB to MiB, bits vs bytes",
+          "100 USD to EUR",
+          "Only currency codes are sent",
+        ],
+      },
+      {
+        icon: Bolt,
+        title: "Quicklinks & Snippets",
+        desc: "Search the web or your own saved links with link:, and copy saved text with snip:.",
+        details: [
+          "Google and GitHub search built in",
+          "{query} placeholders in your URLs",
+          "Multi-line snippets",
+          "Configured with simple JSON files",
+        ],
+      },
+      {
+        icon: Bolt,
+        title: "URL Suggestions",
+        desc: "Type a domain like github.com and Zenkai offers to open it in your default browser, with that browser's icon.",
+        details: [
+          "Bare domains default to HTTPS",
+          "localhost:PORT support",
+          "Ignores normal multi-word searches",
+          "Uses the system default browser",
         ],
       },
     ],
@@ -64,208 +193,167 @@ const features = [
       {
         icon: Plugin,
         title: "Lua Plugin System",
-        desc: "Extend Zenkai with Lua scripts. Drop a directory into external/plugins/ with a manifest.json and main.lua and the launcher picks it up automatically.",
+        desc: "Drop a folder with a manifest.json and a main.lua into a plugin directory and Zenkai picks it up.",
         details: [
-          "Full Lua scripting API",
-          "on_query and on_open hooks",
-          "Add custom results with api.add_result",
-          "Keep launcher open with NoReturn type",
-        ],
-      },
-      {
-        icon: Code,
-        title: "Custom Menu Entries",
-        desc: "Add custom entries directly from the command line. No .desktop file needed.",
-        details: [
-          "Format: --menu=name|cmd|icon",
-          "Repeatable for multiple entries",
-          "Skips .desktop scanning when used",
-          "Perfect for quick launch scripts",
+          "Hooks for queries, opens and actions",
+          "Add results, actions and previews",
+          "Lazy loading with activation prefixes",
+          "Sandboxed, with an instruction limit",
         ],
       },
       {
         icon: Plugin,
-        title: "Clipboard & URL Handling",
-        desc: "Pipe content into a clipboard command or set a custom URL handler for plugin results.",
+        title: "Native Helpers for Plugins",
+        desc: "Plugins get safe access to the clipboard, the filesystem, HTTPS requests and the default browser.",
         details: [
-          "--clipboard for copy-to-clipboard",
-          "--url-handler for custom browser",
-          "Avoid xdg-open launching browser",
-          "Works with xclip, wl-copy, etc",
+          "api.copy_text and api.open_browser",
+          "api.read_dir and api.path_info",
+          "Async api.http_get",
+          "No shell interpolation",
+        ],
+      },
+      {
+        icon: Code,
+        title: "Clipboard & URL Handling",
+        desc: "Pipe plugin output into a clipboard command or pick which program opens URLs.",
+        details: [
+          "--clipboard=wl-copy",
+          "--url-handler=\"firefox --new-tab\"",
+          "Works with xclip, wl-copy and others",
+          "Defaults to xdg-open",
         ],
       },
     ],
   },
   {
-    section: "Themes & Visual",
+    section: "Themes & Look",
     items: [
       {
         icon: Palette,
         title: "65+ Built-in Themes",
-        desc: "Full visual customization via Qt stylesheets. Choose from 65+ built-in themes covering everything from Catppuccin to Dracula to Win95.",
+        desc: "From Catppuccin to Dracula to Win95, plus a native theme that follows your system's light/dark mode and accent color.",
         details: [
-          "65+ curated themes included",
           "QSS-based styling",
-          "Custom .qss file support",
+          "Bring your own .qss file",
+          "native theme for macOS and Windows",
           "Browse with --list-themes",
         ],
       },
       {
         icon: Palette,
         title: "Live Theme Reloader",
-        desc: "Edit .qss files and see changes instantly with the theme reloader. No restart needed.",
+        desc: "Edit a .qss file and see changes instantly, no restart needed.",
         details: [
-          "Hot-reload QSS files",
+          "Hot-reloads QSS files",
           "Instant visual feedback",
-          "Requires --debug flag",
-          "Use --theme-reloader flag",
+          "Use --debug --theme-reloader",
+          "Great for theme authors",
         ],
       },
       {
         icon: Code,
-        title: "Flexible Window Control",
-        desc: "Control every aspect of the launcher window from the command line.",
+        title: "Window & Layout Control",
+        desc: "Size, icons, footer, animations and fullscreen are all one flag or config line away.",
         details: [
-          "Icon size with --size=N",
-          "Window width with --width=N",
-          "Window height with --height=N",
-          "Defaults: 32px icons, 600x500",
+          "--size, --width and --height",
+          "--no-icons and --no-bottom-bar",
+          "--fullscreen and --monitor=N",
+          "Configurable animations and easing",
         ],
       },
       {
         icon: Code,
-        title: "Minimal Mode",
-        desc: "Strip down the UI for a clean, focused launcher experience.",
+        title: "Focus & Backdrop",
+        desc: "Choose what happens when Zenkai loses focus, and optionally dim the screen behind it.",
         details: [
-          "Hide icons with --no-icons",
-          "Hide bottom bar with --no-bottom-bar",
-          "Combine for ultra-minimal look",
-          "Perfect for keyboard-only users",
-        ],
-      },
-    ],
-  },
-  {
-    section: "Display & Behavior",
-    items: [
-      {
-        icon: Code,
-        title: "Multi-Monitor Support",
-        desc: "Open Zenkai on any monitor. Defaults to the monitor under your cursor.",
-        details: [
-          "Select monitor with --monitor=N",
-          "0-based indexing",
-          "List monitors with --list-monitors",
-          "Fullscreen works across monitors",
-        ],
-      },
-      {
-        icon: Code,
-        title: "Fullscreen Mode",
-        desc: "Start in fullscreen for a more immersive experience. Auto-switches to XWayland on Wayland when combined with --monitor.",
-        details: [
-          "Fullscreen with --fullscreen",
-          "Auto-detects Wayland",
-          "Switches to XCB on Wayland",
-          "Great with icon grid themes",
-        ],
-      },
-      {
-        icon: Code,
-        title: "Backdrop & Focus Control",
-        desc: "Control how Zenkai behaves when it loses focus. Show a backdrop to detect clicks outside.",
-        details: [
-          "Close on focus out with --close-on-focus-out",
-          "Stay open with --no-close-on-focus-out",
-          "Show backdrop with --show-backdrop",
-          "Click backdrop to close",
+          "--close-on-focus-out",
+          "--no-close-on-focus-out",
+          "--show-backdrop",
+          "Click the backdrop to close",
         ],
       },
     ],
   },
   {
-    section: "Performance & Debugging",
+    section: "Performance & Platforms",
     items: [
       {
-        icon: Code,
-        title: "Lightning Fast Startup",
-        desc: "Zenkai launches in 45-120ms thanks to its Zig core. No waiting around.",
+        icon: Bolt,
+        title: "Fast Startup",
+        desc: "About 30 ms to first paint and 90 ms until your apps are listed. Plugins load after the first paint, and icons only when they scroll into view.",
         details: [
-          "45-120ms startup time",
-          "Written in Zig for maximum speed",
-          "Qt6 for lightweight UI",
-          "Minimal memory footprint",
+          "~30 ms to first paint",
+          "Plugins deferred until after first paint",
+          "Lazy icon loading",
+          "--benchmark-startup to measure yours",
+        ],
+      },
+      {
+        icon: Bolt,
+        title: "Light on Memory",
+        desc: "Around 34 MB of its own memory, with the Qt libraries shared with the rest of your desktop. No background process: it only runs while it's open.",
+        details: [
+          "~34 MB own memory (PSS)",
+          "No daemon, no tray icon",
+          "No Electron or web view",
+          "See the NVIDIA page for GPU tips",
         ],
       },
       {
         icon: Code,
-        title: "Low Memory Mode",
-        desc: "On Nvidia or when you want a lighter footprint, the zenkai.sh wrapper brings RAM down to 20-50MB.",
+        title: "Linux, macOS & Windows",
+        desc: "One codebase with native integrations on every platform: XDG on Linux, AppKit on macOS, Win32 on Windows. Linux has ready-made downloads; macOS and Windows build from source.",
         details: [
-          "20-50MB with low-memory mode",
-          "40-170MB normal mode",
-          "Included zenkai.sh wrapper script",
-          "No background processes",
-        ],
-      },
-      {
-        icon: Code,
-        title: "Benchmarking & Debugging",
-        desc: "Built-in tools for measuring and debugging performance.",
-        details: [
-          "Benchmark with --benchmark-all",
-          "Debug timer with --debug",
-          "Verbose logging with --verbose, -v",
-          "Theme reloader for development",
-        ],
-      },
-    ],
-  },
-  {
-    section: "Platform & Language",
-    items: [
-      {
-        icon: Code,
-        title: "Cross-Platform",
-        desc: "Zenkai runs on Linux (X11 and Wayland) and macOS with a native Qt6 interface.",
-        details: [
-          "Linux X11 and Wayland support",
-          "macOS native support",
-          "Wayland auto-detection",
-          "Qt6 native widgets",
+          "X11 and Wayland",
+          "Native macOS window handling",
+          "Self-contained Windows build",
+          "Config in XDG or %APPDATA% paths",
         ],
       },
       {
         icon: Code,
         title: "Translations",
-        desc: "Use Zenkai in your language with the built-in translation system.",
+        desc: "Use Zenkai in your language with --language=CODE. Falls back to English.",
         details: [
-          "Language selection with --language=CODE",
+          "--language=fr, --language=de, …",
           "Community-translated strings",
-          "Easy to add new translations",
-          "Falls back to English",
+          "Easy to add a language",
+          "English fallback",
         ],
       },
     ],
   },
 ];
 
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+
 export default function Features() {
   return (
     <MainLayout>
-      <div class="px-4 sm:px-6 py-12 sm:py-20 max-w-6xl mx-auto">
-        <div class="text-center mb-16">
+      <div class="px-4 sm:px-6 py-12 sm:py-20 max-w-7xl mx-auto">
+        <div class="text-center mb-10">
           <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-4">
             Everything <span class="text-primary">Zenkai</span>
           </h1>
           <p class="text-fg text-lg max-w-2xl mx-auto">
-            A fast app launcher for Linux and macOS built with Zig and Qt6.
-            Every feature designed for speed, flexibility, and control.
+            A fast launcher, window switcher and file browser for Linux, macOS and Windows, built with Zig and Qt6.
+            Here is everything it can do.
           </p>
         </div>
 
+        <nav class="flex flex-wrap justify-center gap-2 mb-16">
+          {features.map((section) => (
+            <a
+              href={`#${slug(section.section)}`}
+              class="text-xs sm:text-sm px-3 py-1.5 rounded-full border border-border-100 text-fg hover:border-primary hover:text-primary transition-colors"
+            >
+              {section.section}
+            </a>
+          ))}
+        </nav>
+
         {features.map((section) => (
-          <div class="mb-16">
+          <div class="mb-16 scroll-mt-24" id={slug(section.section)}>
             <h2 class="text-2xl sm:text-3xl font-black text-white mb-8 flex items-center gap-3">
               <span class="w-1.5 h-8 bg-primary rounded-full" />
               {section.section}
@@ -277,7 +365,7 @@ export default function Features() {
                   <Card class="p-6 flex flex-col gap-4">
                     <div class="flex items-start gap-4">
                       <div class="shrink-0 w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-                        <Icon size={20} class="fill-black text-black" />
+                        <Icon size={20} class="text-black" />
                       </div>
                       <div class="flex-1 min-w-0">
                         <h3 class="text-lg font-bold text-white">{f.title}</h3>
@@ -304,13 +392,13 @@ export default function Features() {
         <Card class="flex flex-col gap-4 py-10 px-6 text-center">
           <h2 class="text-2xl text-white font-bold">Ready to try Zenkai?</h2>
           <p class="max-w-lg mx-auto text-muted">
-            Download the latest release and experience the fastest app launcher for Linux and macOS.
+            Download the latest release for Linux, macOS or Windows, or build it from source.
           </p>
           <div class="flex justify-center">
-            <a href="https://github.com/dayvster/zenkai/releases" target="_blank">
+            <a href="/#download">
               <Button variant="solid" class="cursor-pointer gap-2 text-black fill-black">
                 <Download />
-                DOWNLOAD ZENKAI
+                Download for Linux
               </Button>
             </a>
           </div>

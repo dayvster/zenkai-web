@@ -3,21 +3,21 @@ import { Table, Th, Td, TdDesc } from "~/components/Table";
 
 <DocsLayout>
 
-# Plugins
+# Writing Plugins
 
-Zenkai can be extended with **Lua 5.4 scripts**. Drop a directory containing a `manifest.json` and a `main.lua` into one of the plugin directories and Zenkai picks it up automatically at startup.
+Zenkai can be extended with **Lua 5.4** scripts. Put a folder with a `manifest.json` and a `main.lua` into one of the plugin directories and Zenkai picks it up automatically.
 
-## Directory Structure
+New to this? Start with the step-by-step [Your First Plugin](/docs/first-plugin) tutorial.
 
-A plugin is a directory with at least two files:
+## Directory structure
 
 ```
-external/plugins/my-plugin/
+my-plugin/
   manifest.json
   main.lua
 ```
 
-Zenkai searches the following locations (in order):
+Zenkai looks for plugins in these places, in order:
 
 <Table>
   <tr>
@@ -25,16 +25,20 @@ Zenkai searches the following locations (in order):
     <Th>Scope</Th>
   </tr>
   <tr>
-    <Td>`$HOME/.local/share/zenkai/plugins/<name>/`</Td>
-    <TdDesc>User</TdDesc>
+    <Td>`~/.local/share/zenkai/plugins/<name>/`</Td>
+    <TdDesc>User (Linux and macOS)</TdDesc>
   </tr>
   <tr>
-    <Td>`$HOME/.config/zenkai/plugins/<name>/`</Td>
-    <TdDesc>User</TdDesc>
+    <Td>`~/.config/zenkai/plugins/<name>/`</Td>
+    <TdDesc>User (Linux and macOS)</TdDesc>
+  </tr>
+  <tr>
+    <Td>`%APPDATA%\zenkai\plugins\<name>\`</Td>
+    <TdDesc>User (Windows)</TdDesc>
   </tr>
   <tr>
     <Td>`external/plugins/<name>/`</Td>
-    <TdDesc>Project / portable</TdDesc>
+    <TdDesc>Next to the Zenkai executable (bundled plugins)</TdDesc>
   </tr>
   <tr>
     <Td>`/usr/local/share/zenkai/plugins/<name>/`</Td>
@@ -46,7 +50,9 @@ Zenkai searches the following locations (in order):
   </tr>
 </Table>
 
-The first match wins -- if two plugins have the same name, the second is skipped.
+The first match wins: if two plugins share a name, the later one is skipped.
+
+Plugins are discovered and started after the result list first appears, so they never slow down startup. If you type before that, they're started before your query is handled, so no results are lost.
 
 ## manifest.json
 
@@ -57,7 +63,9 @@ The first match wins -- if two plugins have the same name, the second is skipped
   "main": "main.lua",
   "description": "What it does",
   "author": "you",
-  "disabled": false
+  "disabled": false,
+  "activation_prefixes": ["my:"],
+  "platforms": ["linux", "macos"]
 }
 ```
 
@@ -72,19 +80,19 @@ The first match wins -- if two plugins have the same name, the second is skipped
     <Td>`name`</Td>
     <Td>string</Td>
     <Td>yes</Td>
-    <TdDesc>Unique plugin identifier. Must not be empty.</TdDesc>
+    <TdDesc>Unique plugin name.</TdDesc>
   </tr>
   <tr>
     <Td>`main`</Td>
     <Td>string</Td>
     <Td>yes</Td>
-    <TdDesc>Entry point script (relative to plugin dir). Must not be empty.</TdDesc>
+    <TdDesc>Entry script, relative to the plugin folder.</TdDesc>
   </tr>
   <tr>
     <Td>`version`</Td>
     <Td>string</Td>
     <Td>no</Td>
-    <TdDesc>Semantic version string.</TdDesc>
+    <TdDesc>Version string.</TdDesc>
   </tr>
   <tr>
     <Td>`description`</Td>
@@ -96,25 +104,43 @@ The first match wins -- if two plugins have the same name, the second is skipped
     <Td>`author`</Td>
     <Td>string</Td>
     <Td>no</Td>
-    <TdDesc>Author name / handle.</TdDesc>
+    <TdDesc>Your name or handle.</TdDesc>
   </tr>
   <tr>
     <Td>`disabled`</Td>
     <Td>bool</Td>
     <Td>no</Td>
-    <TdDesc>Set `true` to skip loading without deleting the directory.</TdDesc>
+    <TdDesc>Set `true` to skip the plugin without deleting it.</TdDesc>
+  </tr>
+  <tr>
+    <Td>`activation_prefixes`</Td>
+    <Td>string[]</Td>
+    <Td>no</Td>
+    <TdDesc>Load the Lua script only once a query starts with one of these prefixes. See Lazy loading below.</TdDesc>
+  </tr>
+  <tr>
+    <Td>`platforms`</Td>
+    <Td>string[]</Td>
+    <Td>no</Td>
+    <TdDesc>Only load on these platforms: `linux`, `macos`, `windows`. Loads everywhere if left out.</TdDesc>
   </tr>
 </Table>
 
-If `name` or `main` is empty, or `disabled` is `true`, the plugin is skipped.
+Include `version`, `description`, `author` and `disabled` even when you don't need them: Zenkai 1.4 refuses manifests that leave any of them out.
+
+### Lazy loading
+
+With `activation_prefixes`, Zenkai reads the manifest at startup but doesn't load your Lua script or its config until a query starts with one of the prefixes. Matching ignores case but is otherwise literal: `run:` matches `RUN: echo hi` but not `run`.
+
+Once activated, the plugin stays loaded until Zenkai exits. Its `on_startup` runs once, right before its first query. Other hooks only start firing after activation, so leave this field out if your plugin needs lifecycle events from the start. Plugins that never activate don't get `on_close` or `on_shutdown`.
 
 ## Hooks
 
-Hooks are Lua functions defined as globals in `main.lua`. Zenkai scans for them after loading and only calls the ones that exist.
+Hooks are global Lua functions in `main.lua`. Zenkai checks which ones exist and only calls those.
 
 ### `on_query(query)`
 
-Called on every keystroke with the current search text.
+Called whenever the search text changes. Add results with `api.add_result()`.
 
 ```lua
 function on_query(query)
@@ -124,174 +150,164 @@ function on_query(query)
 end
 ```
 
-- `query` -- raw input text (string)
-- Call `api.add_result()` one or more times to populate results
-- Return value is ignored
-
 ### `on_open(id)`
 
-Called when the user selects a result whose `result_type` is `"ExecCmd"`.
+Called when the user presses Enter on one of your results. `id` is the value `api.add_result()` returned. It fires for both result types; `"NoReturn"` just keeps Zenkai open afterwards.
+
+### `on_action(result_id, action_id)`
+
+Called when the user picks one of your actions from the **Ctrl+K** menu. Register actions with `api.add_action()` in `on_query`.
 
 ```lua
-function on_open(id)
-  -- id matches the integer returned by api.add_result
+function on_query(query)
+  local id = api.add_result("Example", "Description", "edit-copy", "NoReturn")
+  api.add_action(id, "Copy Value", 1, "edit-copy")
+end
+
+function on_action(result_id, action_id)
+  if action_id == 1 then api.copy_text("Value") end
 end
 ```
 
-- `id` -- the numeric identifier returned by `api.add_result()`
-- Only fires for results with the default type (`"ExecCmd"`)
-- Not called for `"NoReturn"` results
-
-### `on_close()`
-
-Called when the launcher window is closed (by pressing Escape, selecting a command result, or clicking away).
-
-```lua
-function on_close()
-  api.log("plugin closed")
-end
-```
+Actions keep Zenkai open unless the hook calls `api.close()`.
 
 ### `on_startup()`
 
-Called once after the plugin is loaded and all hooks are registered. Use it for one-time setup.
-
-```lua
-function on_startup()
-  api.log("plugin ready")
-end
-```
+Called once after the plugin is loaded. Use it for one-time setup.
 
 ### `on_shutdown()`
 
-Called during graceful shutdown. Use it to save state or clean up resources.
+Called when Zenkai exits. Use it to save state.
 
-```lua
-function on_shutdown()
-  -- save state, close files, etc.
-end
-```
+### `on_close()`
+
+Called when the launcher window closes (Escape, opening a result, or clicking away).
 
 ### `on_keypress(key)`
 
-Called on every keypress. Receives the key name as a string.
-
-```lua
-function on_keypress(key)
-  if key == "F1" then
-    api.log("F1 pressed")
-  end
-end
-```
-
-- `key` -- key name string (e.g. `"F1"`, `"Return"`, `"Escape"`, `"Tab"`)
+Called on every key press with the key name, e.g. `"F1"`, `"Return"`, `"Escape"` or `"Tab"`.
 
 ### `on_idle()`
 
-Called periodically when the user is not actively typing (debounce / idle loop).
-
-```lua
-function on_idle()
-  -- refresh data, check for changes, etc.
-end
-```
+Called when Zenkai is idle, and when an `api.http_get` request finishes. A good place to call `api.set_query` to refresh results.
 
 ### `on_results(results)`
 
-Called with the full results table just before it is displayed. Allows filtering, reordering, or annotating results.
-
-```lua
-function on_results(results)
-  for i, r in ipairs(results) do
-    -- r.title, r.subtitle, r.icon, r.result_type
-  end
-end
-```
-
-- `results` -- array-like table of result tables, each with `title`, `subtitle`, `icon`, and `result_type` fields
+Called with the full result list just before it's shown. Each entry has `title`, `subtitle`, `icon` and `result_type`.
 
 ## API
 
-The `api` global provides the interface between Lua and Zenkai.
+Everything is on the global `api` table.
 
-### `api.add_result(title, subtitle, icon, result_type)`
-
-Add a result row to the search list.
-
-```lua
-local id = api.add_result("Hello", "world", "face-smile", "NoReturn")
-```
+### Results
 
 <Table>
   <tr>
-    <Th>Param</Th>
-    <Th>Type</Th>
+    <Th>Function</Th>
     <Th>Description</Th>
   </tr>
   <tr>
-    <Td>`title`</Td>
-    <Td>string</Td>
-    <TdDesc>Primary text (displayed in bold).</TdDesc>
+    <Td>`api.add_result(title, subtitle, icon, result_type)`</Td>
+    <TdDesc>Add a result and get back its `id`. `icon` is a theme icon name (or empty). `result_type` is `"ExecCmd"` (default) or `"NoReturn"`.</TdDesc>
   </tr>
   <tr>
-    <Td>`subtitle`</Td>
-    <Td>string</Td>
-    <TdDesc>Secondary text (displayed below title).</TdDesc>
+    <Td>`api.add_action(result_id, label, action_id, icon)`</Td>
+    <TdDesc>Attach a Ctrl+K action to a result. Up to 64 per result.</TdDesc>
   </tr>
   <tr>
-    <Td>`icon`</Td>
-    <Td>string</Td>
-    <TdDesc>Icon name from the system icon theme. Can be empty.</TdDesc>
+    <Td>`api.set_preview(result_id, path)`</Td>
+    <TdDesc>Show this absolute file path in the preview pane when the result is selected.</TdDesc>
   </tr>
   <tr>
-    <Td>`result_type`</Td>
-    <Td>string (optional)</Td>
-    <TdDesc>`"ExecCmd"` (default) or `"NoReturn"`.</TdDesc>
+    <Td>`api.set_query(text)`</Td>
+    <TdDesc>Change the search text after `on_open`, `on_action` or `on_idle` returns. Ignored inside `on_query`.</TdDesc>
+  </tr>
+  <tr>
+    <Td>`api.close()`</Td>
+    <TdDesc>Close Zenkai after the current hook, even for `"NoReturn"` results.</TdDesc>
   </tr>
 </Table>
 
-**Returns** an integer `id` that is passed to `on_open(id)` when the user selects this result.
+### Opening things
 
-Notes:
-- Strings are copied internally -- no need to keep references
-- If memory allocation fails, the result is silently dropped and `add_result` returns `0`
-- The `id` counter increments globally across all plugins
+<Table>
+  <tr>
+    <Th>Function</Th>
+    <Th>Description</Th>
+  </tr>
+  <tr>
+    <Td>`api.open_url(url)`</Td>
+    <TdDesc>Open a URL with `--url-handler` (default `xdg-open`), or pipe it to `--clipboard` if that's set.</TdDesc>
+  </tr>
+  <tr>
+    <Td>`api.open_browser(url)`</Td>
+    <TdDesc>Open an HTTP(S) URL in the system default browser.</TdDesc>
+  </tr>
+  <tr>
+    <Td>`api.browser_icon(scheme)`</Td>
+    <TdDesc>The default browser's icon for `"http"` or `"https"`.</TdDesc>
+  </tr>
+  <tr>
+    <Td>`api.open_path(path)`</Td>
+    <TdDesc>Open a file or folder with its default app. Returns `true`, or `nil, message`.</TdDesc>
+  </tr>
+  <tr>
+    <Td>`api.exec(program, ...)`</Td>
+    <TdDesc>Start a program with arguments, without waiting for it. No shell is involved.</TdDesc>
+  </tr>
+  <tr>
+    <Td>`api.run(program, ...)`</Td>
+    <TdDesc>Run a program and return its output (up to 64 KiB, 2-second timeout).</TdDesc>
+  </tr>
+</Table>
 
-### `api.open_url(url)`
+### Clipboard, network and logging
 
-Schedule a URL or command to open when the current selection is handled. The URL is dispatched after `on_open` returns.
+<Table>
+  <tr>
+    <Th>Function</Th>
+    <Th>Description</Th>
+  </tr>
+  <tr>
+    <Td>`api.copy_text(text)`</Td>
+    <TdDesc>Copy text to the clipboard. Returns `true` if it worked.</TdDesc>
+  </tr>
+  <tr>
+    <Td>`api.http_get(https_url)`</Td>
+    <TdDesc>Fetch a URL without blocking. Returns `nil, "pending"` while loading, then `body, "ok"` or `nil, message`. Finishing triggers `on_idle`.</TdDesc>
+  </tr>
+  <tr>
+    <Td>`api.log(message)`</Td>
+    <TdDesc>Write to the debug log (visible with `--debug` or `--verbose`). `print()` goes there too.</TdDesc>
+  </tr>
+</Table>
 
-```lua
-api.open_url("https://example.com")
-```
+`api.http_get` responses are cached until exit, capped at 64 KiB each and 32 different URLs per session, with a five-second timeout. TLS certificates are checked by Qt.
 
-- `url` -- URL string (max 1023 characters, silently truncated beyond that)
-- If `--clipboard` was passed, the URL is piped to the clipboard command's stdin instead
-- Otherwise, the URL is opened with the configured URL handler (defaults to `xdg-open`)
-- Returns nothing
+### Files
 
-### `api.log(message)`
+<Table>
+  <tr>
+    <Th>Function</Th>
+    <Th>Description</Th>
+  </tr>
+  <tr>
+    <Td>`api.path_info(path)`</Td>
+    <TdDesc>Returns `path`, `name`, `parent`, `is_dir`, `is_link` and `icon`, or `nil, message`.</TdDesc>
+  </tr>
+  <tr>
+    <Td>`api.read_dir(path, offset, filter)`</Td>
+    <TdDesc>List a folder one page at a time. Returns `path`, `parent`, `entries` and `more`. `offset` and the filename `filter` are optional.</TdDesc>
+  </tr>
+  <tr>
+    <Td>`api.file_action(operation, path)`</Td>
+    <TdDesc>Only inside `on_action`. `operation` is `reveal`, `new_file`, `new_folder`, `rename` or `trash`. Shows the needed dialog and returns the new path, or `nil, message` (`"cancelled"` if dismissed).</TdDesc>
+  </tr>
+</Table>
 
-Write a message to the Zenkai debug log.
+Paths are passed straight to the OS, never through a shell, and `~` is expanded.
 
-```lua
-api.log("hello from my plugin")
-```
-
-- `message` -- string
-- Output appears when running with `--debug` or `--verbose`
-- Returns nothing
-
-### `print(...)`
-
-Zenkai overrides Lua's built-in `print` to route output through the internal logger. Multiple arguments are tab-separated.
-
-```lua
-print("value is", 42)
--- logs: lua print: value is	42
-```
-
-## Result Types
+## Result types
 
 <Table>
   <tr>
@@ -300,50 +316,54 @@ print("value is", 42)
   </tr>
   <tr>
     <Td>`"ExecCmd"` (default)</Td>
-    <TdDesc>Closes the launcher, fires `on_open(id)`, then dispatches any pending URL</TdDesc>
+    <TdDesc>Calls `on_open(id)`, closes Zenkai, then handles any pending `api.open_url`.</TdDesc>
   </tr>
   <tr>
     <Td>`"NoReturn"`</Td>
-    <TdDesc>Keeps the launcher open, does NOT fire `on_open`. Useful for inline calculators, previews, palettes</TdDesc>
+    <TdDesc>Calls `on_open(id)` and keeps Zenkai open. Good for calculators and anything you copy.</TdDesc>
   </tr>
 </Table>
 
+## Plugin config
+
+Zenkai reads `<config folder>/<plugin name>.json` (for example `~/.config/zenkai/my-plugin.json`), falling back to `config.json` next to `main.lua`, and hands it to your script as the global `plugin_config` table. Ship a `config.example.json` for users to copy.
+
+The file has a fixed shape. Unknown keys make the whole file invalid (the error shows up in `--debug` output):
+
+```json
+{
+  "commands": [
+    { "title": "Required", "subtitle": "optional", "icon": "optional", "url": "optional", "text": "optional", "exec": "optional" }
+  ],
+  "replace": false,
+  "roots": ["~/Workspace"],
+  "exclude": ["node_modules"],
+  "include_hidden": false
+}
+```
+
+Every key is optional except `title` inside each command. Most plugins only need `commands`: a list of entries your script turns into results.
+
 ## Sandbox
 
-Zenkai runs all plugins in a restricted Lua environment.
-
-### Removed Globals
-
-The following standard Lua globals are set to `nil`:
+Plugins run in a restricted Lua environment. These globals are removed:
 
 <Table>
   <tr>
     <Th>Global</Th>
-    <Th>Reason</Th>
+    <Th>Why</Th>
   </tr>
   <tr>
-    <Td>`os`</Td>
-    <TdDesc>OS-level access (env, execute, exit, etc.)</TdDesc>
+    <Td>`os`, `io`</Td>
+    <TdDesc>Direct OS and filesystem access. Use the `api` functions instead.</TdDesc>
   </tr>
   <tr>
-    <Td>`io`</Td>
-    <TdDesc>File system read/write</TdDesc>
+    <Td>`load`, `loadstring`, `loadfile`, `dofile`</Td>
+    <TdDesc>Running code from strings or files</TdDesc>
   </tr>
   <tr>
-    <Td>`loadfile`</Td>
-    <TdDesc>Load Lua code from arbitrary files</TdDesc>
-  </tr>
-  <tr>
-    <Td>`dofile`</Td>
-    <TdDesc>Execute Lua code from arbitrary files</TdDesc>
-  </tr>
-  <tr>
-    <Td>`require`</Td>
-    <TdDesc>Module loading</TdDesc>
-  </tr>
-  <tr>
-    <Td>`package`</Td>
-    <TdDesc>Module searchers / path configuration</TdDesc>
+    <Td>`require`, `package`</Td>
+    <TdDesc>Loading modules</TdDesc>
   </tr>
   <tr>
     <Td>`debug`</Td>
@@ -351,106 +371,67 @@ The following standard Lua globals are set to `nil`:
   </tr>
 </Table>
 
-Allowed globals include `load` (string-based chunk loading), `pcall` / `xpcall`, `string`, `table`, `math`, `coroutine`, `utf8`, and all other standard Lua libraries.
+`string`, `table`, `math`, `utf8`, `coroutine`, `pcall` and `xpcall` are all available.
 
-### Instruction Limit
+Each hook call may run at most **50,000 Lua instructions**. A plugin that goes over is stopped with `"plugin exceeded instruction limit"`, so a runaway loop can't freeze Zenkai.
 
-Every plugin call (hook invocation) is limited to **50,000 Lua instructions**. If a plugin exceeds this limit, it is immediately terminated with a `"plugin exceeded instruction limit"` error. This prevents runaway loops from freezing the launcher.
+## Example: a word counter
 
-## Loading Plugins
+```lua
+-- manifest.json: { "name": "wordcount", "main": "main.lua", "activation_prefixes": ["wc:"] }
+
+local last_count = nil
+
+function on_query(query)
+  local text = query:match("^[wW][cC]:%s*(.*)$")
+  if not text or text == "" then return end
+
+  local words = 0
+  for _ in text:gmatch("%S+") do words = words + 1 end
+  last_count = tostring(words)
+
+  local id = api.add_result(words .. " words", #text .. " characters", "accessories-text-editor", "NoReturn")
+  api.add_action(id, "Copy and Close", 1, "edit-copy")
+end
+
+-- Enter copies the count and keeps Zenkai open
+function on_open(id)
+  if last_count then api.copy_text(last_count) end
+end
+
+-- Ctrl+K → "Copy and Close"
+function on_action(result_id, action_id)
+  if action_id == 1 and last_count then
+    api.copy_text(last_count)
+    api.close()
+  end
+end
+```
+
+For bigger examples, read the bundled plugins in `external/plugins/`: `calculator`, `files`, `quicklinks`, `snippets` and `url`.
+
+## Loading plugins
 
 ```bash
-# Auto-load all plugins in standard directories
+# Load everything (default)
 zenkai
 
-# Load only one specific plugin
-zenkai --plugin=calculator
+# Only specific plugins
+zenkai --plugin=calculator --plugin=files
 
-# Load multiple specific plugins
-zenkai --plugin=calculator --plugin=notes
-
-# Disable all plugins
+# No plugins at all
 zenkai --no-plugins
 
-# Plugin-only mode (no desktop apps)
+# Plugins only, no apps
 zenkai --no-dapps --plugin=calculator
 ```
 
-## Calculator Example
+## Tips
 
-The built-in calculator plugin at `external/plugins/calculator/` evaluates math expressions inline.
-
-**`manifest.json`**:
-```json
-{
-  "name": "calculator",
-  "version": "1.0.0",
-  "main": "main.lua",
-  "description": "Evaluate math expressions inline",
-  "author": "built-in",
-  "disabled": false
-}
-```
-
-**`main.lua`** with annotations:
-
-```lua
--- Strip everything except math operators and digits
-function eval_math(expr)
-  local safe = expr:gsub("[^%d%+%-%*%/%%%^%_%s%.%(%)%%]", "")
-  if safe == "" or #safe < 2 then
-    return nil
-  end
-  -- Use load() on a string to evaluate (loadfile is removed, load is not)
-  local fn, err = load("return (" .. safe .. ")")
-  if not fn then
-    return nil
-  end
-  local ok, result = pcall(fn)
-  -- NaN check: result == result is false for NaN
-  if ok and type(result) == "number" and result == result then
-    return result
-  end
-  return nil
-end
-
-function on_query(query)
-  if query == "" or #query < 2 then
-    return
-  end
-  local expr = query:gsub("%s+", "")
-  local result = eval_math(expr)
-  if result then
-    local display = tostring(result)
-    local rounded = tonumber(string.format("%.10g", result))
-    if rounded then
-      display = tostring(rounded)
-    end
-    -- NoReturn keeps the launcher open so the user can keep typing
-    api.add_result(display, expr .. " =", "accessories-calculator", "NoReturn")
-  end
-end
-
--- on_open is required to exist but does nothing for NoReturn results
-function on_open(id)
-end
-```
-
-Key points:
-- `load("return (...)" )` is safe because `loadfile`, `dofile`, `require`, `package` are all removed
-- The sandbox still allows `pcall` and `string`, `math`, etc.
-- `"NoReturn"` means the launcher stays open and `on_open` is never called
-- The icon `"accessories-calculator"` comes from the system icon theme
-
-## Development Tips
-
-1. **Check the logs** -- run `zenkai --debug` to see `api.log()` and `print()` output, plus any Lua errors
-2. **Use `"NoReturn"` for live previews** -- keeps the launcher open so users can keep typing
-3. **Keep `on_query` fast** -- it runs on every keystroke; defer heavy work to `on_idle` or cache results
-4. **`on_open` only fires for `"ExecCmd"`** -- if your result type is `"NoReturn"`, `on_open` is never called
-5. **Test with `--plugin=<name>`** -- load only your plugin during development to avoid interference
-6. **The 50k instruction limit is per hook call** -- if you need more, break work across multiple hooks or use `on_idle` for background processing
-7. **Use `pcall` for risky operations** -- `load()` can return nil + error on syntax errors; always wrap it in `pcall`
-8. **Icon names** are system theme dependent -- use common FreeDesktop names like `"face-smile"`, `"accessories-calculator"`, `"system-search"`
+1. **Check the logs:** `zenkai --debug` shows `api.log()` and `print()` output and any Lua errors.
+2. **Keep `on_query` fast:** it runs on every keystroke. Cache work, and use `api.http_get` plus `on_idle` for anything slow.
+3. **Use a prefix:** `activation_prefixes` keeps your plugin from costing anything until it's needed.
+4. **Test in isolation:** `--plugin=<name>` loads only your plugin.
+5. **Icon names** come from the system icon theme. Common freedesktop names like `"face-smile"` and `"system-search"` are the safest bet.
 
 </DocsLayout>

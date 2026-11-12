@@ -5,26 +5,29 @@ import { Table, Th, Td, TdDesc } from "~/components/Table";
 
 # Overview
 
-Zenkai is a fast app launcher for Linux and macOS written in **Zig** with **Qt6**. It scans .desktop files and filters through them with instant fuzzy matching.
+Zenkai is a fast, keyboard-driven launcher for **Linux**, **macOS** and **Windows**, written in **Zig** with **Qt6**.
 
-## What is Zenkai?
+One search bar finds your apps, switches between open windows, browses and previews files, does math and unit conversions, and runs anything you add with a Lua plugin.
 
-A fast app launcher for Linux. Written in Zig with Qt6.
+## What can it do?
 
-It scans your .desktop files from the usual places, shows you everything in a searchable list, and lets you filter through it as you type with fuzzy matching.
+- **Launch apps** - fuzzy search across .desktop files on Linux and Start Menu shortcuts on Windows
+- **Switch windows** - type `win:` to focus any open window, then snap it to a half, maximize it or move it to another display
+- **Browse files** - type a path like `~/Documents`, or `file: report` to search filenames
+- **Preview files** - text, code with syntax colors, images and folder listings with **Ctrl+P**
+- **Act on results** - **Ctrl+K** opens an actions menu: copy paths, rename, move to trash, open a private browser window and more
+- **Calculate** - scientific math, unit conversions and currency rates
+- **Quicklinks and snippets** - `link:` searches the web or your saved links, `snip:` copies saved text
+- **Themes** - 65+ built-in themes, or write your own in QSS
+- **Extend** - Lua plugins with hooks for queries, actions and previews
 
-## Key Features
+## Where to start
 
-- **Fuzzy Search** - Type a few characters and find any application instantly
-- **65+ Themes** - Full visual customization via Qt stylesheets
-- **Lua Plugin System** - Extend with Lua scripts via on_query/on_open hooks
-- **Desktop Actions** - Parse [Desktop Action] entries from .desktop files
-- **Desktop Scanning** - Automatic indexing of all XDG directories
-- **Icon Grid View** - Fullscreen icon grid layout with launchpad theme
-- **Full CLI Control** - 25+ command-line flags for every setting
-- **Translations** - Multi-language support with --language flag
-- **Theme Reloader** - Live QSS reloading for theme development
-- **Low Memory Mode** - 20-50MB with included zenkai.sh wrapper
+- [Installation](/docs/installation) - build it or grab a release
+- [Usage](/docs/usage) - the search prefixes and launch modes
+- [Keyboard Shortcuts](/docs/shortcuts) - every key binding
+- [Window Switcher](/docs/window-switcher) - platform support and layouts
+- [Writing Plugins](/docs/plugins) - the Lua API
 
 ## Tech Stack
 
@@ -35,28 +38,28 @@ It scans your .desktop files from the usual places, shows you everything in a se
   </tr>
   <tr>
     <Td>Language</Td>
-    <TdDesc>Zig</TdDesc>
+    <TdDesc>Zig 0.17</TdDesc>
   </tr>
   <tr>
-    <Td>UI Framework</Td>
-    <TdDesc>Qt6 (Core, Gui, Widgets)</TdDesc>
+    <Td>UI</Td>
+    <TdDesc>Qt 6.8 (Core, Gui, Widgets, Svg) via libqt6zig</TdDesc>
   </tr>
   <tr>
     <Td>Scripting</Td>
-    <TdDesc>Lua (via ziglua)</TdDesc>
+    <TdDesc>Lua 5.4 via ziglua</TdDesc>
   </tr>
   <tr>
-    <Td>Build System</Td>
-    <TdDesc>Zig Build</TdDesc>
+    <Td>KDE windows</Td>
+    <TdDesc>kwinctl (KWin scripts over D-Bus, pure Zig)</TdDesc>
   </tr>
   <tr>
     <Td>Platforms</Td>
-    <TdDesc>Linux (X11/Wayland), macOS</TdDesc>
+    <TdDesc>Linux (X11 and Wayland), macOS, Windows</TdDesc>
   </tr>
 </Table>
 
 ## Credits
 
-Built on [libqt6zig](https://github.com/rcalixte/libqt6zig) by [rcalixte](https://github.com/rcalixte) - Zig bindings for Qt6.
+Built on [libqt6zig](https://github.com/rcalixte/libqt6zig) by [rcalixte](https://github.com/rcalixte), the Zig bindings for Qt6.
 
 </DocsLayout>

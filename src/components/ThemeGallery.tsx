@@ -124,7 +124,7 @@ export function ThemeCard(props: { name: string; desc: string }) {
 
 export function ThemeGallery(props: { themes: ThemeInfo[] }) {
   return (
-    <div class="max-w-6xl mx-auto">
+    <div class="max-w-7xl mx-auto">
       <div class="mb-12">
         <h1 class="text-4xl sm:text-5xl font-black text-white mb-3">
           Themes

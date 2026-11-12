@@ -1,10 +1,10 @@
 import { ImageSlider } from "./ImageSlider";
 
 const themes = [
-  { src: "imgs/ayu-dark.png", label: "Ayu Dark" },
-  { src: "imgs/dracula.png", label: "Dracula" },
-  { src: "imgs/nord.png", label: "Nord" },
-  { src: "imgs/catppuccin.png", label: "Catppuccin" },
+  { src: "/imgs/ayu-dark.png", label: "Ayu Dark" },
+  { src: "/imgs/dracula.png", label: "Dracula" },
+  { src: "/imgs/nord.png", label: "Nord" },
+  { src: "/imgs/catppuccin.png", label: "Catppuccin" },
 ];
 
 export const ThemeSlider = () => {

@@ -1,0 +1,98 @@
+import DocsLayout from "~/layouts/DocsLayout";
+import { Table, Th, Td, TdDesc } from "~/components/Table";
+
+<DocsLayout>
+
+# Configuration
+
+Zenkai creates a `zenkai.conf` with the defaults the first time it starts. Command-line flags override it.
+
+<Table>
+  <tr>
+    <Th>Platform</Th>
+    <Th>Config folder</Th>
+  </tr>
+  <tr>
+    <Td>Linux and macOS</Td>
+    <TdDesc>`$XDG_CONFIG_HOME/zenkai`, usually `~/.config/zenkai`</TdDesc>
+  </tr>
+  <tr>
+    <Td>Windows</Td>
+    <TdDesc>`%APPDATA%\zenkai`</TdDesc>
+  </tr>
+</Table>
+
+## zenkai.conf
+
+```ini
+# Window size
+window_width = 600
+window_height = 500
+file_previews = false
+
+# Space around and between the search bar and the list
+layout_margin = 0
+layout_spacing = 0
+
+# Icon size in the list
+icon_size = 32
+
+# Close when Zenkai loses focus
+close_on_focus_out = false
+
+# Transparent backdrop that closes Zenkai when clicked
+show_backdrop = false
+
+# Command that receives copied plugin results (e.g. wl-copy)
+clipboard = ""
+
+# Program that opens URLs from plugins
+url_handler = "xdg-open"
+
+# Animations
+no_animations = false
+animation_interval = 200
+# linear, in-quad, out-quad, in-out-quad, in-cubic, out-cubic,
+# in-out-cubic, out-back, in-out-back
+animation_easing = "out-cubic"
+
+# Bottom bar spacing
+bottom_bar_margin_top = 4
+bottom_bar_margin_bottom = 4
+bottom_bar_margin_left = 8
+bottom_bar_margin_right = 8
+bottom_bar_spacing = 4
+```
+
+The theme is chosen with `--theme`. On Windows the default is `native`, which follows your system's light/dark mode and accent color.
+
+## Plugin config files
+
+Bundled plugins read their settings from `<plugin name>.json` in the same folder:
+
+<Table>
+  <tr>
+    <Th>File</Th>
+    <Th>Used for</Th>
+  </tr>
+  <tr>
+    <Td>`files.json`</Td>
+    <TdDesc>Search roots, excluded folders and hidden files. See [Files & Previews](/docs/files).</TdDesc>
+  </tr>
+  <tr>
+    <Td>`quicklinks.json`</Td>
+    <TdDesc>Your saved links and search URLs. See [Built-in Tools](/docs/built-in-tools).</TdDesc>
+  </tr>
+  <tr>
+    <Td>`snippets.json`</Td>
+    <TdDesc>Your saved text snippets.</TdDesc>
+  </tr>
+</Table>
+
+Each plugin ships a `config.example.json` to start from. A `config.json` next to the plugin's `main.lua` also works as a fallback. Restart Zenkai after changing any of these.
+
+## Your own plugins
+
+Put your plugins in `plugins/` inside the config folder, or in `~/.local/share/zenkai/plugins` on Linux. See [Writing Plugins](/docs/plugins).
+
+</DocsLayout>

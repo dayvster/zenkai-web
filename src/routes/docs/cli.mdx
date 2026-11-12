@@ -5,9 +5,9 @@ import { Table, Th, Td, TdDesc } from "~/components/Table";
 
 # CLI Flags
 
-Zenkai provides a full set of command-line flags for customization and control.
+Every setting can be passed on the command line. Flags override [zenkai.conf](/docs/configuration). Run `zenkai --help` for the same list in your terminal.
 
-## General
+## Modes
 
 <Table>
   <tr>
@@ -16,9 +16,29 @@ Zenkai provides a full set of command-line flags for customization and control.
     <Th>Description</Th>
   </tr>
   <tr>
-    <Td>--help, -h</Td>
+    <Td>--window-switcher</Td>
     <Td>-</Td>
-    <TdDesc>Show help and exit</TdDesc>
+    <TdDesc>Start as a window switcher with open windows already listed</TdDesc>
+  </tr>
+  <tr>
+    <Td>--no-window-switcher</Td>
+    <Td>-</Td>
+    <TdDesc>Turn off the built-in `win:` window search</TdDesc>
+  </tr>
+  <tr>
+    <Td>--run</Td>
+    <Td>-</Td>
+    <TdDesc>Windows only: open Run mode and run the typed command or URL</TdDesc>
+  </tr>
+  <tr>
+    <Td>--no-dapps</Td>
+    <Td>-</Td>
+    <TdDesc>Skip app scanning (for plugin-only or `--menu` setups)</TdDesc>
+  </tr>
+  <tr>
+    <Td>--menu</Td>
+    <Td>name|cmd|icon</Td>
+    <TdDesc>Add a custom entry. Repeatable. Skips app scanning</TdDesc>
   </tr>
 </Table>
 
@@ -48,31 +68,41 @@ Zenkai provides a full set of command-line flags for customization and control.
   <tr>
     <Td>--fullscreen</Td>
     <Td>-</Td>
-    <TdDesc>Start in fullscreen mode</TdDesc>
+    <TdDesc>Start fullscreen on the selected monitor</TdDesc>
   </tr>
   <tr>
     <Td>--monitor</Td>
     <Td>N</Td>
-    <TdDesc>Open on a specific monitor (0-based)</TdDesc>
+    <TdDesc>Open on a specific monitor (0-based, default: the one under the cursor)</TdDesc>
   </tr>
   <tr>
     <Td>--list-monitors</Td>
     <Td>-</Td>
-    <TdDesc>List all available monitors and exit</TdDesc>
+    <TdDesc>List monitors with their index and geometry, then exit</TdDesc>
   </tr>
   <tr>
     <Td>--no-icons</Td>
     <Td>-</Td>
-    <TdDesc>Hide icons in the list</TdDesc>
+    <TdDesc>Hide icons</TdDesc>
   </tr>
   <tr>
     <Td>--no-bottom-bar</Td>
     <Td>-</Td>
-    <TdDesc>Hide the bottom bar</TdDesc>
+    <TdDesc>Hide the bottom bar (Ctrl+K still works)</TdDesc>
+  </tr>
+  <tr>
+    <Td>--file-previews</Td>
+    <Td>-</Td>
+    <TdDesc>Show the file preview pane</TdDesc>
+  </tr>
+  <tr>
+    <Td>--no-file-previews</Td>
+    <Td>-</Td>
+    <TdDesc>Hide previews, overriding the config (the last flag wins)</TdDesc>
   </tr>
 </Table>
 
-## Theme
+## Theme & Animation
 
 <Table>
   <tr>
@@ -83,21 +113,36 @@ Zenkai provides a full set of command-line flags for customization and control.
   <tr>
     <Td>--theme</Td>
     <Td>NAME or path</Td>
-    <TdDesc>Set theme by name or path to .qss file</TdDesc>
+    <TdDesc>Built-in theme name, `native`, or a path to a .qss file</TdDesc>
   </tr>
   <tr>
     <Td>--list-themes</Td>
     <Td>-</Td>
-    <TdDesc>List all 65+ built-in themes and exit</TdDesc>
+    <TdDesc>List all themes with descriptions, then exit</TdDesc>
   </tr>
   <tr>
     <Td>--theme-reloader</Td>
     <Td>-</Td>
-    <TdDesc>Watch .qss files and apply changes on the fly (requires --debug)</TdDesc>
+    <TdDesc>Reload .qss files live as you edit them (needs `--debug`)</TdDesc>
+  </tr>
+  <tr>
+    <Td>--no-animations</Td>
+    <Td>-</Td>
+    <TdDesc>Turn off window animations</TdDesc>
+  </tr>
+  <tr>
+    <Td>--animation-interval</Td>
+    <Td>MS</Td>
+    <TdDesc>Animation length in milliseconds (default: 200)</TdDesc>
+  </tr>
+  <tr>
+    <Td>--animation-easing</Td>
+    <Td>TYPE</Td>
+    <TdDesc>Easing curve: linear, out-cubic, out-back, …</TdDesc>
   </tr>
 </Table>
 
-## Desktop Actions
+## Actions
 
 <Table>
   <tr>
@@ -106,24 +151,14 @@ Zenkai provides a full set of command-line flags for customization and control.
     <Th>Description</Th>
   </tr>
   <tr>
-    <Td>--menu</Td>
-    <Td>name|cmd|icon</Td>
-    <TdDesc>Add a custom menu entry (repeatable)</TdDesc>
-  </tr>
-  <tr>
     <Td>--show-actions</Td>
     <Td>-</Td>
-    <TdDesc>Parse and show [Desktop Action] entries</TdDesc>
+    <TdDesc>Show [Desktop Action] entries such as New Window</TdDesc>
   </tr>
   <tr>
     <Td>--actions-bottombar</Td>
     <Td>-</Td>
-    <TdDesc>Show desktop actions in the bottom bar</TdDesc>
-  </tr>
-  <tr>
-    <Td>--no-dapps</Td>
-    <Td>-</Td>
-    <TdDesc>Skip scanning .desktop files</TdDesc>
+    <TdDesc>Show desktop actions in the bottom bar instead of the list</TdDesc>
   </tr>
 </Table>
 
@@ -138,22 +173,22 @@ Zenkai provides a full set of command-line flags for customization and control.
   <tr>
     <Td>--no-plugins</Td>
     <Td>-</Td>
-    <TdDesc>Skip loading all plugins</TdDesc>
+    <TdDesc>Don't load any plugins</TdDesc>
   </tr>
   <tr>
     <Td>--plugin</Td>
     <Td>NAME</Td>
-    <TdDesc>Only load matching plugin (repeatable)</TdDesc>
+    <TdDesc>Load only this plugin. Repeatable</TdDesc>
   </tr>
   <tr>
     <Td>--clipboard</Td>
     <Td>CMD</Td>
-    <TdDesc>Clipboard command for plugin results (e.g. wl-copy)</TdDesc>
+    <TdDesc>Pipe copied plugin results into this command (e.g. `wl-copy`)</TdDesc>
   </tr>
   <tr>
     <Td>--url-handler</Td>
     <Td>CMD</Td>
-    <TdDesc>URL handler for plugin open_url (e.g. firefox --new-tab)</TdDesc>
+    <TdDesc>Program plugins use to open URLs (default: `xdg-open`)</TdDesc>
   </tr>
 </Table>
 
@@ -168,22 +203,22 @@ Zenkai provides a full set of command-line flags for customization and control.
   <tr>
     <Td>--close-on-focus-out</Td>
     <Td>-</Td>
-    <TdDesc>Close when launcher loses focus</TdDesc>
+    <TdDesc>Close when Zenkai loses focus</TdDesc>
   </tr>
   <tr>
     <Td>--no-close-on-focus-out</Td>
     <Td>-</Td>
-    <TdDesc>Keep open when focus is lost</TdDesc>
+    <TdDesc>Stay open when Zenkai loses focus</TdDesc>
   </tr>
   <tr>
     <Td>--show-backdrop</Td>
     <Td>-</Td>
-    <TdDesc>Show transparent backdrop, click to close</TdDesc>
+    <TdDesc>Transparent fullscreen layer behind Zenkai; clicking it closes Zenkai</TdDesc>
   </tr>
   <tr>
     <Td>--language</Td>
     <Td>CODE</Td>
-    <TdDesc>Translation language code (e.g. fr, de)</TdDesc>
+    <TdDesc>Interface language (e.g. fr, de)</TdDesc>
   </tr>
 </Table>
 
@@ -196,57 +231,58 @@ Zenkai provides a full set of command-line flags for customization and control.
     <Th>Description</Th>
   </tr>
   <tr>
+    <Td>--verbose, -v</Td>
+    <Td>-</Td>
+    <TdDesc>More logging</TdDesc>
+  </tr>
+  <tr>
     <Td>--debug</Td>
     <Td>-</Td>
-    <TdDesc>Enable debug timer and verbose logging</TdDesc>
+    <TdDesc>More logging plus startup timings</TdDesc>
+  </tr>
+  <tr>
+    <Td>--benchmark-startup</Td>
+    <Td>-</Td>
+    <TdDesc>Print startup timings as JSON after the list is painted, then exit</TdDesc>
   </tr>
   <tr>
     <Td>--benchmark-all</Td>
     <Td>-</Td>
-    <TdDesc>Print timing for every startup stage</TdDesc>
+    <TdDesc>Time every startup stage (Debug builds)</TdDesc>
   </tr>
   <tr>
-    <Td>--verbose, -v</Td>
+    <Td>--help, -h</Td>
     <Td>-</Td>
-    <TdDesc>Verbose logging</TdDesc>
+    <TdDesc>Show all flags and exit</TdDesc>
   </tr>
 </Table>
 
 ## Examples
 
 ```bash
-# Everyday launch
-zenkai
+# Window switcher on a hotkey
+zenkai --window-switcher
 
 # Dracula theme, bigger icons, wider window
 zenkai --theme=dracula --size=48 --width=800
 
-# Fullscreen icon grid on second monitor
+# File previews with room for them
+zenkai --file-previews --width=900
+
+# Fullscreen icon grid on the second monitor
 zenkai --theme=launchpad --fullscreen --monitor=1
 
-# Custom menu entries, skip desktop scanning
+# Custom menu, no app scanning
 zenkai --menu="Firefox|firefox|firefox" --menu="Terminal|alacritty|terminal"
 
-# Minimal look
-zenkai --no-icons --no-bottom-bar
-
-# Copy URLs to clipboard instead of opening
-zenkai --clipboard="wl-copy"
-
-# Plugin-only mode
+# Calculator only
 zenkai --no-dapps --plugin=calculator
+
+# Copy URLs to the clipboard instead of opening them
+zenkai --clipboard="wl-copy"
 
 # Hot-reload a theme you're working on
 zenkai --debug --theme-reloader --theme=./my-theme.qss
-
-# Low memory mode
-./zenkai.sh
-
-# See all monitors
-zenkai --list-monitors
-
-# See all themes
-zenkai --list-themes
 ```
 
 </DocsLayout>

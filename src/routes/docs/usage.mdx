@@ -1,42 +1,128 @@
 import DocsLayout from "~/layouts/DocsLayout";
+import { Table, Th, Td, TdDesc } from "~/components/Table";
 
 <DocsLayout>
 
 # Usage
 
-Launch Zenkai from your terminal or application menu:
+Start Zenkai from a terminal, or better, [bind it to a hotkey](/docs/hotkeys) in your desktop or window manager:
 
 ```bash
 zenkai
 ```
 
-Start typing to filter through your applications. The results update instantly as you type. Press **Enter** to launch the selected application.
+Start typing and the list filters as you go. Press **Enter** to open the selected result, **Ctrl+K** for its actions, and **Esc** to close.
 
-## Basic Workflow
+## What you can type
 
-1. Open Zenkai (via hotkey or terminal)
-2. Type part of the application name
-3. Results appear instantly with fuzzy matching
-4. Press **Enter** to launch, or **Esc** to close
+Everything shares one search bar. Plain text searches your apps; a prefix or a recognizable pattern switches to something else.
 
-## Examples
+<Table>
+  <tr>
+    <Th>Type</Th>
+    <Th>What happens</Th>
+  </tr>
+  <tr>
+    <Td>`fire`</Td>
+    <TdDesc>Fuzzy-search apps. Enter launches the selected one.</TdDesc>
+  </tr>
+  <tr>
+    <Td>`win: editor`</Td>
+    <TdDesc>Find an open window by title or app name. Enter switches to it. See [Window Switcher](/docs/window-switcher).</TdDesc>
+  </tr>
+  <tr>
+    <Td>`~/Documents`</Td>
+    <TdDesc>Browse a folder. Enter opens files with their default app. See [Files & Previews](/docs/files).</TdDesc>
+  </tr>
+  <tr>
+    <Td>`file: report`</Td>
+    <TdDesc>Search filenames under your home folder (or your configured roots).</TdDesc>
+  </tr>
+  <tr>
+    <Td>`2 + 3 * 4`</Td>
+    <TdDesc>Calculator. Enter copies the answer and keeps Zenkai open.</TdDesc>
+  </tr>
+  <tr>
+    <Td>`100 cm to m`</Td>
+    <TdDesc>Unit and currency conversion.</TdDesc>
+  </tr>
+  <tr>
+    <Td>`link: zig allocator`</Td>
+    <TdDesc>Search Google, GitHub or your saved quicklinks.</TdDesc>
+  </tr>
+  <tr>
+    <Td>`snip: greeting`</Td>
+    <TdDesc>Find a saved snippet. Enter copies its text.</TdDesc>
+  </tr>
+  <tr>
+    <Td>`github.com`</Td>
+    <TdDesc>Offer to open the URL in your default browser.</TdDesc>
+  </tr>
+</Table>
 
-Launch with a specific theme:
+Prefixes are case-insensitive. The tools behind them are covered in [Built-in Tools](/docs/built-in-tools).
+
+## Launch modes
+
+The same binary can start in a few different modes:
+
+<Table>
+  <tr>
+    <Th>Command</Th>
+    <Th>Mode</Th>
+  </tr>
+  <tr>
+    <Td>`zenkai`</Td>
+    <TdDesc>Normal launcher with apps, plugins and `win:` window search.</TdDesc>
+  </tr>
+  <tr>
+    <Td>`zenkai --window-switcher`</Td>
+    <TdDesc>Dedicated window switcher. Windows are listed right away and typing filters them without `win:`.</TdDesc>
+  </tr>
+  <tr>
+    <Td>`zenkai --run`</Td>
+    <TdDesc>Windows only: a Run box that opens the typed command or URL with the Windows shell.</TdDesc>
+  </tr>
+  <tr>
+    <Td>`zenkai --no-dapps --plugin=calculator`</Td>
+    <TdDesc>Plugin-only mode, here a standalone calculator.</TdDesc>
+  </tr>
+  <tr>
+    <Td>`zenkai --theme=launchpad --fullscreen`</Td>
+    <TdDesc>Fullscreen icon grid with a pill-shaped search bar.</TdDesc>
+  </tr>
+</Table>
+
+## The actions menu
+
+Press **Ctrl+K** on any result to open a searchable menu of things you can do with it. Type to filter, use Up/Down to pick one and Enter to run it.
+
+- **Apps:** Copy Name, Copy Launch Command, plus New Window and New Private Window for browsers
+- **Windows:** Switch to Window, Copy Window Title, Left/Right/Top/Bottom Half, Maximize, Center Window, Move to Next Display
+- **Files and folders:** Open, Reveal in File Manager, Copy Path, New File, New Folder, Rename, Move to Trash
+- **URLs and quicklinks:** Copy URL
+- **Snippets:** Copy Snippet
+- **Calculator:** Copy Result, Copy Expression
+
+The bottom bar shows the main actions too. Hide it with `--no-bottom-bar`; Ctrl+K still works.
+
+## More examples
 
 ```bash
-zenkai --theme=catppuccin
-```
+# Dracula theme, bigger icons, wider window
+zenkai --theme=dracula --size=48 --width=800
 
-Start in fullscreen mode on monitor 1:
+# Show file previews, with room for them
+zenkai --file-previews --width=900
 
-```bash
-zenkai --fullscreen --monitor=1
-```
+# Custom entries only, no app scanning
+zenkai --menu="Firefox|firefox|firefox" --menu="Terminal|alacritty|terminal"
 
-Add a custom menu entry:
+# Minimal look
+zenkai --no-icons --no-bottom-bar
 
-```bash
-zenkai --menu="Terminal|alacritty|terminal"
+# Close when you click outside
+zenkai --close-on-focus-out
 ```
 
 </DocsLayout>
