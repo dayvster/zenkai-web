@@ -11,6 +11,7 @@ import { Window } from "~/components/svgs/Window";
 import { Keyboard } from "~/components/svgs/Keyboard";
 import { Calculator } from "~/components/svgs/Calculator";
 import { Bolt } from "~/components/svgs/Bolt";
+import { Globe } from "~/components/svgs/Globe";
 
 const features = [
   {
@@ -96,6 +97,44 @@ const features = [
           "Hyprland via hyprctl, Sway via swaymsg",
           "X11 via wmctrl and xrandr",
           "macOS via Accessibility APIs",
+        ],
+      },
+    ],
+  },
+  {
+    section: "Browser",
+    items: [
+      {
+        icon: Globe,
+        title: "Tab Switcher",
+        desc: "With the Zenkai Web extension, tab: lists the open tabs of every browser and window. Enter switches to one.",
+        details: [
+          "Matches titles and URLs",
+          "Most recently used first",
+          "New tab, new window, reopen closed tab",
+          "Close duplicate tabs",
+        ],
+      },
+      {
+        icon: Globe,
+        title: "Tab Actions",
+        desc: "Press Ctrl+K on a tab to close, reload, pin, mute or move it without leaving the launcher.",
+        details: [
+          "Pin / Unpin and Mute / Unmute",
+          "Move to New Window",
+          "Close Other Tabs",
+          "Bookmark it or copy its URL",
+        ],
+      },
+      {
+        icon: Globe,
+        title: "Bookmarks & History",
+        desc: "bm: searches bookmarks and folders, hist: searches your history. Rename, move and delete bookmarks from the search bar.",
+        details: [
+          "Chrome, Brave, Edge, Vivaldi and Firefox",
+          "Browse into folders",
+          "Open a folder in tabs",
+          "Nothing leaves your machine",
         ],
       },
     ],
