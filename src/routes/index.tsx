@@ -88,7 +88,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div class="w-full sm:w-[460px] lg:w-[520px] shrink-0">
+        <div class="w-full sm:w-[560px] lg:w-[600px] xl:w-[640px] shrink-0">
           <HeroDemo />
         </div>
       </section>

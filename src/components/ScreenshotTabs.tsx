@@ -213,7 +213,7 @@ export const ScreenshotTabs = (props: { class?: string }) => {
                     src={`/imgs/screens/${c.key}.webp`}
                     alt={`Zenkai ${c.label.toLowerCase()} screenshot`}
                     width="1200"
-                    height="1038"
+                    height="1029"
                     class="w-full scale-[1.2] @2xl:scale-100 transition-transform"
                   />
                 </div>

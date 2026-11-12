@@ -13,13 +13,11 @@ export const HeroDemo = () => (
       poster="/imgs/demo-poster.webp"
       width="1280"
       height="720"
-      aria-label="Zenkai switching to a window and snapping it to the left half of the screen"
+      aria-label="Zenkai launching Blender, switching to Kate and snapping it to the left half, then calculating sqrt(144) + 3"
     >
       <source src="/videos/zenkai-demo.mp4" type="video/mp4" />
       <source src="/videos/zenkai-demo.webm" type="video/webm" />
     </video>
-    <figcaption class="mt-3 text-center text-xs text-muted">
-      Real recording on KDE Plasma 6: <code class="text-primary">win: kate</code>, then <kbd class="kbd">Ctrl+K</kbd> → Left Half
-    </figcaption>
+    <figcaption class="mt-3 text-center text-xs text-muted">Recorded on KDE Plasma 6.</figcaption>
   </figure>
 );
