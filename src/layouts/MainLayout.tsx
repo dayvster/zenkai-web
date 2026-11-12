@@ -12,15 +12,15 @@ export const MainLayout = (props: Props) => {
   return (
     <div class="min-h-screen flex flex-col">
       <Navi />
-      <div class={`flex-1 flex flex-col ${fullWidth ? "" : "max-w-6xl mx-auto w-full"}`}>
+      <div class={`flex-1 flex flex-col ${fullWidth ? "" : "max-w-7xl mx-auto w-full"}`}>
         {children}
       </div>
       <footer class="border-t border-border/40">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-12">
             <div>
               <p class="text-sm font-bold text-white mb-3">Zenkai</p>
-              <p class="text-xs text-muted leading-relaxed mb-4">A fast app launcher for Linux. Written in Zig with Qt6.</p>
+              <p class="text-xs text-muted leading-relaxed mb-4">A fast launcher and window switcher for Linux, macOS and Windows. Written in Zig with Qt6.</p>
               <a href="https://www.buymeacoffee.com/dayvi1990T" target="_blank">
                 <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" class="h-10" />
               </a>
@@ -39,7 +39,8 @@ export const MainLayout = (props: Props) => {
               <p class="text-sm font-bold text-white mb-3">Built on</p>
               <div class="flex flex-col gap-1.5">
                 <a href="https://github.com/rcalixte/libqt6zig" target="_blank" class="text-xs text-muted hover:text-primary transition-colors">libqt6zig</a>
-                <a href="https://github.com/masterQ32/ziglua" target="_blank" class="text-xs text-muted hover:text-primary transition-colors">ziglua</a>
+                <a href="https://github.com/natecraddock/ziglua" target="_blank" class="text-xs text-muted hover:text-primary transition-colors">ziglua</a>
+                <a href="https://github.com/dayvster/kwinctl" target="_blank" class="text-xs text-muted hover:text-primary transition-colors">kwinctl</a>
               </div>
             </div>
           </div>

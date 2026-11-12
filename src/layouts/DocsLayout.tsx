@@ -6,10 +6,16 @@ const pages = [
   { label: "Overview", href: "/docs" },
   { label: "Installation", href: "/docs/installation" },
   { label: "Usage", href: "/docs/usage" },
+  { label: "Hotkey Setup", href: "/docs/hotkeys" },
+  { label: "Keyboard Shortcuts", href: "/docs/shortcuts" },
+  { label: "Window Switcher", href: "/docs/window-switcher" },
+  { label: "Files & Previews", href: "/docs/files" },
+  { label: "Built-in Tools", href: "/docs/built-in-tools" },
+  { label: "Configuration", href: "/docs/configuration" },
   { label: "CLI Flags", href: "/docs/cli" },
   { label: "Themes", href: "/docs/themes" },
-  { label: "Plugins", href: "/docs/plugins" },
-  { label: "Keyboard Shortcuts", href: "/docs/shortcuts" },
+  { label: "Your First Plugin", href: "/docs/first-plugin" },
+  { label: "Writing Plugins", href: "/docs/plugins" },
   { label: "NVIDIA", href: "/docs/nvidia" },
 ];
 
@@ -22,7 +28,7 @@ export const DocsLayout = (props: Props) => {
 
   return (
     <MainLayout>
-      <div class="px-4 sm:px-6 py-12 sm:py-20 max-w-5xl mx-auto">
+      <div class="px-4 sm:px-6 py-12 sm:py-20 max-w-6xl mx-auto">
         <div class="flex flex-col lg:flex-row gap-10">
           <nav class="lg:w-48 shrink-0">
             <div class="sticky top-20 flex flex-col gap-1">

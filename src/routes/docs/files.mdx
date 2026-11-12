@@ -1,0 +1,91 @@
+import DocsLayout from "~/layouts/DocsLayout";
+import { Table, Th, Td, TdDesc } from "~/components/Table";
+
+<DocsLayout>
+
+# Files & Previews
+
+The bundled `files` plugin lets you browse folders and search filenames from the search bar, and the preview pane shows what's inside.
+
+## Browsing and searching
+
+<Table>
+  <tr>
+    <Th>Type</Th>
+    <Th>What happens</Th>
+  </tr>
+  <tr>
+    <Td>`/home/you/Workspace`</Td>
+    <TdDesc>Browse a folder on Linux</TdDesc>
+  </tr>
+  <tr>
+    <Td>`~/Documents`</Td>
+    <TdDesc>Browse a folder in your home directory (Linux and macOS)</TdDesc>
+  </tr>
+  <tr>
+    <Td>`C:\Users\you\Workspace` or `~\Workspace`</Td>
+    <TdDesc>Browse a folder on Windows (forward slashes work too)</TdDesc>
+  </tr>
+  <tr>
+    <Td>`~/Documents/rep`</Td>
+    <TdDesc>Filter a folder by a partial filename</TdDesc>
+  </tr>
+  <tr>
+    <Td>`file: report`</Td>
+    <TdDesc>Search filenames under your search roots (your home folder by default)</TdDesc>
+  </tr>
+  <tr>
+    <Td>`file:`</Td>
+    <TdDesc>Browse your home folder</TdDesc>
+  </tr>
+</Table>
+
+Enter opens folders inside Zenkai and files with their default app. The `..` row goes up a level. Folders are listed first and load in pages of 128 entries. Browsing a path directly shows hidden files too.
+
+Search scans as you go instead of building an index. When there's more to look through, pick **Continue searching** to scan further. Each step returns up to 100 matches. Search skips symlinked folders and common dependency and cache folders like `node_modules`.
+
+## File actions
+
+Press **Ctrl+K** on a file or folder:
+
+<img src="/imgs/screens/file-actions.webp" alt="The actions pane for a file" width="1200" height="1038" loading="lazy" class="w-full max-w-[560px] rounded-xl border border-border-100 my-6" />
+
+- **Open with Default App** / **Open in File Manager**
+- **Reveal in File Manager** - selects the item in Explorer, Finder or your Linux file manager
+- **Copy Path**
+- **New File…** / **New Folder…** - create an empty file or folder next to (or inside) the selection
+- **Rename…**
+- **Move to Trash…** - asks first, with Cancel as the default. There's no permanent delete.
+
+Create and rename never overwrite something that already exists. If something goes wrong, Zenkai stays open and shows the error in the results. Trashed items can be restored from your system's file manager.
+
+## Previews
+
+Turn on the preview pane with `--file-previews` or `file_previews = true` in [zenkai.conf](/docs/configuration). Press **Ctrl+P** (**Command+P** on macOS) at any time to toggle it for the current session.
+
+The pane appears when a file or folder is selected and shows:
+
+- **Text and code** up to 128 KiB, with syntax colors for Zig, Lua, C/C++, Rust, Go, JavaScript/TypeScript, Python, shell scripts, JSON and other common formats
+- **Images** up to 16 MiB and 16 megapixels (animated images show their first frame)
+- **Folders** - the first 64 entries
+
+Binary files and unsupported formats show file details instead. HTML is shown as plain text: no scripts or external viewers ever run. The pane takes part of the window width, so try `--width=900` for more room.
+
+## Configuration
+
+Copy `external/plugins/files/config.example.json` to your config folder as `files.json`:
+
+- Linux and macOS: `~/.config/zenkai/files.json`
+- Windows: `%APPDATA%\zenkai\files.json`
+
+```json
+{
+  "roots": ["~/Workspace", "~/Documents"],
+  "exclude": [".git", "node_modules", ".cache", ".zig-cache", "zig-pkg", "Library", "AppData"],
+  "include_hidden": false
+}
+```
+
+Use forward slashes or escaped backslashes for Windows paths in JSON. Restart Zenkai after changing it. Typing a path directly works even outside your search roots.
+
+</DocsLayout>

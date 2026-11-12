@@ -29,10 +29,10 @@ import { GitHub } from "./svgs/GitHub";
 export const Navi = () => {
   const title = "Zenkai";
   const mainIcon = "";
-  return <nav class="sticky top-0 z-50 backdrop-blur-sm bg-base/80 flex items-center gap-4 border-b border-border px-6 py-3">
-    <div class="flex items-center gap-4">
+  return <nav class="sticky top-0 z-50 backdrop-blur-sm bg-base/80 flex items-center gap-4 border-b border-border px-4 sm:px-6 py-3">
+    <div class="flex items-center gap-4 sm:gap-5 text-sm sm:text-base">
       <a href="/" class="font-bold text-primary transition-colors">
-        <img src="imgs/logo.png" alt="Zenkai Logo" class="max-h-6" />
+        <img src="/imgs/logo.png" alt="Zenkai Logo" class="max-h-6" />
       </a>
       {NavItems.map((item) => {
         return <a href={item.href} class="text-fg hover:text-primary transition-colors">{item.label}</a>

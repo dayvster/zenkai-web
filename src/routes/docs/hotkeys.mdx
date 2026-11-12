@@ -1,0 +1,80 @@
+import DocsLayout from "~/layouts/DocsLayout";
+
+<DocsLayout>
+
+# Setting Up a Hotkey
+
+Zenkai is meant to live on a key. Most people bind two commands:
+
+```bash
+zenkai                     # the launcher
+zenkai --window-switcher   # straight into window switching
+```
+
+Add any other flags you like, such as `--theme=dracula` or `--file-previews`. If `zenkai` isn't on your `PATH`, use the full path to the binary.
+
+## KDE Plasma
+
+1. Open **System Settings → Keyboard → Shortcuts**.
+2. Click **Add New → Command or Script…**.
+3. Enter `zenkai` as the command and pick a shortcut, such as **Meta+Space**.
+4. Repeat with `zenkai --window-switcher` for the switcher.
+
+Plasma already uses **Alt+Space** and **Alt+F2** for KRunner and **Alt+Tab** for its own task switcher. To reuse one of those, clear it first under **Shortcuts → KRunner** or **Shortcuts → KWin**.
+
+## Hyprland
+
+In `hyprland.conf`:
+
+```ini
+bind = SUPER, SPACE, exec, zenkai
+bind = ALT, TAB, exec, zenkai --window-switcher
+```
+
+If you use the Lua configuration instead:
+
+```lua
+hl.bind("SUPER + SPACE", hl.dsp.exec_cmd("zenkai"))
+hl.bind("ALT + TAB", hl.dsp.exec_cmd("zenkai --window-switcher"))
+```
+
+## Sway and i3
+
+In your Sway or i3 config:
+
+```ini
+bindsym $mod+space exec zenkai
+bindsym Mod1+Tab exec zenkai --window-switcher
+```
+
+Reload with `swaymsg reload` or `i3-msg reload`.
+
+## GNOME
+
+1. Open **Settings → Keyboard → View and Customize Shortcuts → Custom Shortcuts**.
+2. Click **+**, name it Zenkai, enter `zenkai` as the command and set a shortcut.
+
+On GNOME under Wayland the window switcher isn't available yet, so only bind the launcher there.
+
+## Windows
+
+1. Find `zenkai.exe`, right-click it and choose **Show more options → Create shortcut**.
+2. Move the shortcut into your Start Menu folder: press **Win+R**, type `shell:programs` and drop it there.
+3. Right-click the shortcut → **Properties**, click the **Shortcut key** box and press a letter such as **Z**. Windows turns it into **Ctrl+Alt+Z**.
+
+For the window switcher, make a second shortcut and add `--window-switcher` to the end of its **Target**. Windows also has a built-in Run box; `zenkai.exe --run` gives you Zenkai's version of it.
+
+## macOS
+
+1. Open the **Shortcuts** app and create a new shortcut.
+2. Add a **Run Shell Script** action that runs the full path to your `zenkai` binary.
+3. Open the shortcut's details (the **ⓘ** button), choose **Add Keyboard Shortcut** and press your keys.
+
+For the window switcher, add `--window-switcher` to the command, and allow Zenkai Accessibility access in **System Settings → Privacy & Security → Accessibility**.
+
+## Tips
+
+- With `--close-on-focus-out`, clicking anywhere else closes Zenkai, so the hotkey behaves like a toggle.
+- `--show-backdrop` puts a transparent layer behind Zenkai that closes it when clicked.
+
+</DocsLayout>

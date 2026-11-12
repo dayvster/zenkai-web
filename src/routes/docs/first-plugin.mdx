@@ -1,0 +1,159 @@
+import DocsLayout from "~/layouts/DocsLayout";
+
+<DocsLayout>
+
+# Your First Plugin
+
+This walks you through building a small but complete plugin: **bookmarks**. Type `bm:` and it lists your favourite sites; Enter opens one, and Ctrl+K lets you copy the URL instead. It takes about ten minutes and covers everything most plugins need.
+
+The full reference lives in [Writing Plugins](/docs/plugins).
+
+## 1. Create the folder
+
+Plugins live in the `plugins` folder inside Zenkai's config folder:
+
+```bash
+mkdir -p ~/.config/zenkai/plugins/bookmarks
+cd ~/.config/zenkai/plugins/bookmarks
+```
+
+On Windows, use `%APPDATA%\zenkai\plugins\bookmarks`.
+
+## 2. Write the manifest
+
+Create `manifest.json`:
+
+```json
+{
+  "name": "bookmarks",
+  "version": "1.0.0",
+  "main": "main.lua",
+  "description": "Open your favourite sites with bm:",
+  "author": "you",
+  "disabled": false,
+  "activation_prefixes": ["bm:"]
+}
+```
+
+Keep all six of the first fields, even if some are empty strings: Zenkai 1.4 refuses manifests that leave one out.
+
+`activation_prefixes` tells Zenkai not to load the script at all until a query starts with `bm:`, so the plugin costs nothing until you use it.
+
+## 3. Show a result
+
+Create `main.lua`:
+
+```lua
+function on_query(query)
+  if query:sub(1, 3):lower() ~= "bm:" then return end
+  api.add_result("Hello from bookmarks", "It works!", "bookmarks", "NoReturn")
+end
+```
+
+`on_query` runs every time the search text changes. `api.add_result(title, subtitle, icon, type)` adds a row; `icon` is any name from your icon theme. `"NoReturn"` keeps Zenkai open when the row is picked.
+
+Try it, loading only your plugin and showing its log output:
+
+```bash
+zenkai --plugin=bookmarks --debug
+```
+
+Type `bm:` and your result appears. If it doesn't, the terminal shows any Lua error.
+
+## 4. List real bookmarks
+
+Replace `main.lua` with a list you can filter:
+
+```lua
+local bookmarks = {
+  { title = "Zig docs", url = "https://ziglang.org/documentation/master/" },
+  { title = "Zenkai on GitHub", url = "https://github.com/dayvster/zenkai" },
+  { title = "Lua manual", url = "https://www.lua.org/manual/5.4/" },
+}
+
+local shown = {} -- result id -> bookmark
+
+function on_query(query)
+  shown = {}
+  if query:sub(1, 3):lower() ~= "bm:" then return end
+  local term = query:sub(4):match("^%s*(.-)%s*$"):lower()
+
+  for _, b in ipairs(bookmarks) do
+    if term == "" or b.title:lower():find(term, 1, true) then
+      local id = api.add_result(b.title, b.url, "bookmarks")
+      shown[id] = b
+    end
+  end
+end
+
+function on_open(id)
+  local b = shown[id]
+  if b then api.open_browser(b.url) end
+end
+```
+
+What's new:
+
+- `api.add_result` returns an **id**. Keep a table from id to your own data, and clear it at the start of each query.
+- `on_open(id)` runs when the user presses Enter on one of your rows. These rows use the default `"ExecCmd"` type, so Zenkai closes afterwards.
+- `api.open_browser(url)` opens the page in the system default browser.
+- `find(term, 1, true)` does a plain substring match, so characters like `.` in a search aren't treated as patterns.
+
+Restart Zenkai and try `bm: zig`.
+
+## 5. Add an action
+
+Actions show up in the **Ctrl+K** pane. Register them while adding results and handle them in `on_action`:
+
+```lua
+-- inside the loop, after api.add_result:
+      api.add_action(id, "Copy URL", 1, "edit-copy")
+
+-- at the bottom of the file:
+function on_action(id, action_id)
+  local b = shown[id]
+  if b and action_id == 1 then
+    api.copy_text(b.url)
+    api.close()
+  end
+end
+```
+
+`action_id` is any number you choose, so you can tell actions apart. Actions keep Zenkai open unless you call `api.close()`.
+
+## 6. Move the bookmarks into a config file
+
+Hard-coded lists are fine for you, but a config file lets other people use your plugin. Zenkai reads `~/.config/zenkai/bookmarks.json` and gives it to your script as `plugin_config`:
+
+```json
+{
+  "commands": [
+    { "title": "Zig docs", "url": "https://ziglang.org/documentation/master/" },
+    { "title": "Lua manual", "url": "https://www.lua.org/manual/5.4/", "icon": "help-contents" }
+  ]
+}
+```
+
+Then read it at the top of `on_query`, falling back to your built-in list:
+
+```lua
+local list = (plugin_config and plugin_config.commands) or bookmarks
+for _, b in ipairs(list) do
+  -- same as before, using b.icon or "bookmarks" for the icon
+end
+```
+
+The config file has a fixed shape (see Plugin config in [Writing Plugins](/docs/plugins)). Each entry needs a `title` and can have `subtitle`, `icon`, `url`, `text` and `exec`. Restart Zenkai after editing it.
+
+## 7. Share it
+
+Put a `config.example.json` next to `main.lua` so users have something to copy, and you're done. Anyone can install your plugin by dropping the folder into their own `plugins` directory.
+
+## Things to know
+
+- **The sandbox:** `os`, `io`, `require` and `load` aren't available. Use the `api` functions for files, clipboard, network and launching programs.
+- **Stay fast:** `on_query` runs on every keystroke, and each hook call is limited to 50,000 Lua instructions. For network data, use `api.http_get` with `on_idle`.
+- **Platforms:** add `"platforms": ["linux"]` (or `macos`, `windows`) to the manifest if your plugin only makes sense on some systems.
+- **Learn from the bundled ones:** `snippets`, `quicklinks` and `url` in Zenkai's `external/plugins` folder are short and readable.
+
+</DocsLayout>

@@ -1,0 +1,109 @@
+import DocsLayout from "~/layouts/DocsLayout";
+import { Table, Th, Td, TdDesc } from "~/components/Table";
+
+<DocsLayout>
+
+# Built-in Tools
+
+Zenkai ships with a set of Lua plugins that turn the search bar into more than an app launcher. Disable all of them with `--no-plugins`, or load only some with `--plugin=NAME`.
+
+## Calculator
+
+Type an expression and the answer shows up as a result. Enter copies it and keeps Zenkai open; Ctrl+K also offers Copy Expression.
+
+<img src="/imgs/screens/calculator.webp" alt="The calculator showing the result of sqrt(144) + 3" width="1200" height="1038" loading="lazy" class="w-full max-w-[560px] rounded-xl border border-border-100 my-6" />
+
+<Table>
+  <tr>
+    <Th>Example</Th>
+    <Th>Result</Th>
+  </tr>
+  <tr>
+    <Td>`sqrt(144) + max(2, 3)`</Td>
+    <TdDesc>`15`</TdDesc>
+  </tr>
+  <tr>
+    <Td>`sin(pi / 2)`</Td>
+    <TdDesc>`1` (trigonometry uses radians)</TdDesc>
+  </tr>
+  <tr>
+    <Td>`1e3 / 4`</Td>
+    <TdDesc>`250`</TdDesc>
+  </tr>
+  <tr>
+    <Td>`15% of 80`</Td>
+    <TdDesc>`12`</TdDesc>
+  </tr>
+</Table>
+
+Functions: `sqrt`, `abs`, `floor`, `ceil`, `round`, `min`, `max`, `sin`, `cos`, `tan`, `asin`, `acos`, `atan`, `ln`, `log` (base 10), `exp`, `rad` and `deg`. Constants: `pi`, `tau` and `e`.
+
+## Unit and currency conversion
+
+<Table>
+  <tr>
+    <Th>Example</Th>
+    <Th>Result</Th>
+  </tr>
+  <tr>
+    <Td>`100 cm to m`</Td>
+    <TdDesc>`1 m`</TdDesc>
+  </tr>
+  <tr>
+    <Td>`32 f to c`</Td>
+    <TdDesc>`0 c`</TdDesc>
+  </tr>
+  <tr>
+    <Td>`2 GiB to MiB`</Td>
+    <TdDesc>`2048 MiB`</TdDesc>
+  </tr>
+  <tr>
+    <Td>`100 USD to EUR`</Td>
+    <TdDesc>Latest reference rate, with its date</TdDesc>
+  </tr>
+</Table>
+
+Supports length, mass, time, volume, speed, temperature, angles and data sizes. Data units tell bits (`Mb`) from bytes (`MB`) and decimal from binary (`MiB`).
+
+Currency rates come from [Frankfurter](https://frankfurter.dev/), which publishes daily reference rates (not live trading prices). Only the currency codes are sent, never the amount. Rates are cached until Zenkai closes. Everything else works offline.
+
+## Quicklinks
+
+Type `link:` and a search to search Google or GitHub, or to find one of your saved links by title.
+
+Add your own by copying the plugin's `config.example.json` to `~/.config/zenkai/quicklinks.json` (`%APPDATA%\zenkai\quicklinks.json` on Windows). Each entry under `commands` has a `title` and an `http(s)` `url`. A `{query}` placeholder in the URL is replaced with what you typed. Set `"replace": true` to drop the built-in Google and GitHub searches.
+
+## Snippets
+
+Type `snip:` to find a saved snippet by title or description. Enter copies its text (it doesn't type it into another app).
+
+Snippets live in `snippets.json` in the same config folder. Each one has a `title`, an optional `subtitle` and the `text`. Use `\n` for line breaks.
+
+## URL suggestions
+
+Type something that looks like a URL, such as `github.com` or `localhost:3000`, and Zenkai offers to open it in your default browser, shown with that browser's icon. Bare domains open over HTTPS and `localhost` with a port over HTTP. Normal multi-word searches and email addresses are ignored.
+
+## Desktop palettes
+
+<Table>
+  <tr>
+    <Th>Plugin</Th>
+    <Th>What it does</Th>
+  </tr>
+  <tr>
+    <Td>`hyprland`</Td>
+    <TdDesc>Hyprland command palette for workspaces, windows, monitors, floating, fullscreen, lock, screenshots and more. Type `hypr` or `wm` to use it.</TdDesc>
+  </tr>
+  <tr>
+    <Td>`osx`</Td>
+    <TdDesc>macOS palette for power, audio, volume and live system status. Type `os`, `mac` or `sys` to use it.</TdDesc>
+  </tr>
+  <tr>
+    <Td>`run`</Td>
+    <TdDesc>Windows only: `run:` runs a command with the Windows shell. `zenkai --run` opens straight into it.</TdDesc>
+  </tr>
+</Table>
+
+Plugin settings are read once at startup, so restart Zenkai after changing a config file.
+
+</DocsLayout>

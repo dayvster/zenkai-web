@@ -97,3 +97,37 @@
   --theme-border-primary-muted: #f38d2740;
   --theme-ring: #95E6CB;
 }
+
+.kbd {
+  display: inline-block;
+  padding: 0.05rem 0.4rem;
+  border: 1px solid var(--color-border-100);
+  border-bottom-width: 2px;
+  border-radius: 0.375rem;
+  background: var(--color-bg-elevated);
+  color: #fff;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.8em;
+  white-space: nowrap;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Screenshot tabs: entrance animations, replayed whenever the selection changes */
+@keyframes zk-pop {
+  from { opacity: 0; transform: translateY(10px) scale(0.985); filter: blur(4px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+@keyframes zk-rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+.zk-pop { animation: zk-pop 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.zk-rise { animation: zk-rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .zk-pop, .zk-rise { animation: none; }
+  html { scroll-behavior: auto; }
+}
