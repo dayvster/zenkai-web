@@ -16,8 +16,8 @@ type Section = {
 
 const roadmap: Section[] = [
   {
-    section: "Next release (v1.6)",
-    intro: "Most of v1.6 is already on main.",
+    section: "v1.6 (released)",
+    intro: "Out now: download it from the home page or install it from the AUR.",
     items: [
       {
         title: "Settings window",
@@ -30,7 +30,8 @@ const roadmap: Section[] = [
       { title: "Square app icon, used by the AUR packages", done: true },
       {
         title: "Source-built zenkai package on the AUR",
-        desc: "zenkai-bin is already there.",
+        desc: "Next to zenkai-bin, which installs the prebuilt release.",
+        done: true,
       },
     ],
   },
