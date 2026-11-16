@@ -1,23 +1,25 @@
 import { JSX } from "solid-js";
 import { useLocation } from "@solidjs/router";
 import MainLayout from "./MainLayout";
+import Seo from "~/components/Seo";
 
+// The sidebar, and each page's title and description for search engines.
 const pages = [
-  { label: "Overview", href: "/docs" },
-  { label: "Installation", href: "/docs/installation" },
-  { label: "Usage", href: "/docs/usage" },
-  { label: "Hotkey Setup", href: "/docs/hotkeys" },
-  { label: "Keyboard Shortcuts", href: "/docs/shortcuts" },
-  { label: "Window Switcher", href: "/docs/window-switcher" },
-  { label: "Browser Extension", href: "/docs/browser" },
-  { label: "Files & Previews", href: "/docs/files" },
-  { label: "Built-in Tools", href: "/docs/built-in-tools" },
-  { label: "Configuration", href: "/docs/configuration" },
-  { label: "CLI Flags", href: "/docs/cli" },
-  { label: "Themes", href: "/docs/themes" },
-  { label: "Your First Plugin", href: "/docs/first-plugin" },
-  { label: "Writing Plugins", href: "/docs/plugins" },
-  { label: "NVIDIA", href: "/docs/nvidia" },
+  { label: "Overview", href: "/docs", title: "Documentation", description: "How to install, use, configure and extend Zenkai, the keyboard-driven app launcher and window switcher built with Zig and Qt6." },
+  { label: "Installation", href: "/docs/installation", description: "Install Zenkai from the AUR (zenkai-bin or zenkai), as an AppImage, .deb or tarball, or build it from source with Zig." },
+  { label: "Usage", href: "/docs/usage", description: "Start Zenkai and use its search bar: apps, windows, files, math and more, plus launch modes and the actions menu." },
+  { label: "Hotkey Setup", href: "/docs/hotkeys", description: "Bind Zenkai and its window switcher to a key in KDE Plasma, Hyprland, Sway, i3, GNOME, Windows and macOS." },
+  { label: "Keyboard Shortcuts", href: "/docs/shortcuts", description: "Every keyboard shortcut in Zenkai, for using the launcher without a mouse." },
+  { label: "Window Switcher", href: "/docs/window-switcher", description: "Switch between open windows on KDE Plasma, Hyprland, Sway, X11, Windows and macOS, and snap them to halves, maximize or move them between displays." },
+  { label: "Browser Extension", href: "/docs/browser", description: "Search and switch browser tabs, history and bookmarks from Zenkai, in Firefox and Chromium-based browsers like Chrome, Brave, Edge and Vivaldi." },
+  { label: "Files & Previews", href: "/docs/files", description: "Browse folders, search filenames and preview files from Zenkai's search bar." },
+  { label: "Built-in Tools", href: "/docs/built-in-tools", description: "The plugins that ship with Zenkai: calculator, unit and currency conversion, quicklinks, snippets, an emoji picker and more." },
+  { label: "Configuration", href: "/docs/configuration", description: "Every setting in zenkai.conf, with its default." },
+  { label: "CLI Flags", href: "/docs/cli", description: "Zenkai's command-line flags, which override zenkai.conf." },
+  { label: "Themes", href: "/docs/themes", description: "Browse Zenkai's built-in themes." },
+  { label: "Your First Plugin", href: "/docs/first-plugin", description: "A ten-minute tutorial: build a bookmarks plugin for Zenkai in Lua." },
+  { label: "Writing Plugins", href: "/docs/plugins", description: "The reference for writing Zenkai plugins in Lua 5.4: directory layout, manifest.json, hooks and the API." },
+  { label: "NVIDIA", href: "/docs/nvidia", description: "Environment variables that fix Qt 6 rendering issues with Zenkai on NVIDIA GPUs." },
 ];
 
 export type Props = {
@@ -26,9 +28,11 @@ export type Props = {
 
 export const DocsLayout = (props: Props) => {
   const location = useLocation();
+  const page = () => pages.find((p) => p.href === location.pathname.replace(/\/$/, "")) ?? pages[0];
 
   return (
     <MainLayout>
+      <Seo title={page().title ?? page().label} description={page().description} />
       <div class="px-4 sm:px-6 py-12 sm:py-20 max-w-6xl mx-auto">
         <div class="flex flex-col lg:flex-row gap-10">
           <nav class="lg:w-48 shrink-0">

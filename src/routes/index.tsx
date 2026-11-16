@@ -1,4 +1,4 @@
-import { For } from "solid-js";
+import { For, Suspense } from "solid-js";
 import MainLayout from "@/layouts/MainLayout";
 import { ChipVersion } from "@/components/chipversion";
 import { HeroDemo } from "@/components/HeroDemo";
@@ -15,6 +15,7 @@ import { ComingFrom } from "~/components/ComingFrom";
 import { Readybar } from "~/components/readybar";
 import { DownloadSection } from "~/components/DownloadSection";
 import { ScreenshotTabs } from "~/components/ScreenshotTabs";
+import Seo, { SITE_URL } from "~/components/Seo";
 
 const buildCmd = `git clone https://github.com/dayvster/zenkai
 cd zenkai
@@ -33,12 +34,35 @@ const dependencies = [
   { name: "pkg-config", desc: "Helps the build find the Qt headers and libraries on Linux." },
 ];
 
+// Lets search engines show Zenkai as an app: free, open source, with its platforms.
+const softwareJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Zenkai",
+  description: "A fast, keyboard-driven app launcher and window switcher, built with Zig and Qt6.",
+  url: `${SITE_URL}/`,
+  image: `${SITE_URL}/og-image.png`,
+  applicationCategory: "UtilitiesApplication",
+  operatingSystem: "Linux, Windows, macOS",
+  license: "https://www.gnu.org/licenses/gpl-3.0.html",
+  downloadUrl: "https://github.com/dayvster/zenkai/releases/latest",
+  codeRepository: "https://github.com/dayvster/zenkai",
+  author: { "@type": "Person", name: "dayvster", url: "https://dayvster.com" },
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+};
+
 export default function Home() {
   return (
     <MainLayout>
+      <Seo description="Fast, keyboard-driven launcher and window switcher for Linux, macOS and Windows, built with Zig and Qt6. Launch apps, switch windows, browse files and calculate from one search bar." />
+      <script type="application/ld+json" innerHTML={JSON.stringify(softwareJsonLd)} />
       <section class="flex flex-col lg:flex-row gap-10 lg:gap-14 items-center mt-6 sm:mt-16 px-4 sm:px-6">
         <div class="flex flex-col gap-5 w-full items-center lg:items-start text-center lg:text-left">
-          <ChipVersion />
+          {/* Both release lookups wait in their own boundary, so the rest of the page renders
+              once. Re-rendering it would add the canonical link to the head a second time. */}
+          <Suspense>
+            <ChipVersion />
+          </Suspense>
           <h1 class="main-heading text-[2.5rem] sm:text-6xl lg:text-[4.25rem] font-black text-white leading-[1.05]">
             Your whole desktop, <br class="hidden sm:block" />
             <span class="text-primary">one keystroke away.</span>
@@ -116,7 +140,9 @@ export default function Home() {
       </section>
 
       <section class="px-4 sm:px-6 mt-16 sm:mt-32">
-        <DownloadSection />
+        <Suspense>
+          <DownloadSection />
+        </Suspense>
       </section>
 
       <section class="px-4 sm:px-6 mt-16 sm:mt-32">

@@ -1,4 +1,5 @@
 import MainLayout from "@/layouts/MainLayout";
+import Seo from "~/components/Seo";
 import { Card } from "~/components/Card";
 
 // Mirrors ROADMAP.md in the zenkai repository; keep the two in step.
@@ -103,6 +104,7 @@ const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(
 export default function Roadmap() {
   return (
     <MainLayout>
+      <Seo title="Roadmap" description="What's next for Zenkai: what shipped in each release and what's planned, from root search to a richer plugin API." />
       <div class="px-4 sm:px-6 py-12 sm:py-20 max-w-4xl mx-auto w-full">
         <div class="text-center mb-10">
           <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-4">
