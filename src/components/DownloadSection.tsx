@@ -76,6 +76,21 @@ export const DownloadSection = () => {
         </Show>
       </p>
 
+      {/* Not tied to the release assets, so it shows even when GitHub's API is unavailable */}
+      <Card class="p-5 mb-8 flex flex-col gap-3">
+        <div>
+          <p class="font-bold text-white">Arch Linux (AUR)</p>
+          <p class="text-xs text-muted">
+            <a href="https://aur.archlinux.org/packages/zenkai-bin" target="_blank" class="text-primary hover:underline">zenkai-bin</a>,
+            updated with the rest of your system by your AUR helper
+          </p>
+        </div>
+        <CopyBlock
+          code="yay -S zenkai-bin"
+          class="bg-[#111] border border-border/80 rounded-lg p-3 font-mono text-xs text-white overflow-x-auto"
+        />
+      </Card>
+
       <Show
         when={release()}
         fallback={
