@@ -4,7 +4,27 @@ import DocsLayout from "~/layouts/DocsLayout";
 
 # Installation
 
-Grab a ready-made build from the [download section](/#download), or build it yourself.
+Install it from the AUR on Arch, grab a ready-made build from the [download section](/#download), or build it yourself.
+
+## Arch Linux (AUR)
+
+Zenkai is on the AUR as [zenkai-bin](https://aur.archlinux.org/packages/zenkai-bin), which packages the latest release. With an AUR helper:
+
+```bash
+yay -S zenkai-bin
+# or
+paru -S zenkai-bin
+```
+
+Without a helper, build and install the package yourself:
+
+```bash
+git clone https://aur.archlinux.org/zenkai-bin.git
+cd zenkai-bin
+makepkg -si
+```
+
+Your AUR helper updates it with the rest of your system. Window switching on KDE Plasma is built in; the [kwinctl](https://aur.archlinux.org/packages/kwinctl) package is optional and adds the `kwinctl` command-line tool.
 
 ## Download a release
 
