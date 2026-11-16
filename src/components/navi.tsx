@@ -20,7 +20,11 @@ export const NavItems: NavItem[] = [
     href: "/docs",
     icon: "docs",
   },
- 
+  {
+    label: "Roadmap",
+    href: "/roadmap",
+    icon: "roadmap",
+  },
 ];
 
 
