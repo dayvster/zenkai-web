@@ -82,7 +82,8 @@ export const DownloadSection = () => {
           <p class="font-bold text-white">Arch Linux (AUR)</p>
           <p class="text-xs text-muted">
             <a href="https://aur.archlinux.org/packages/zenkai-bin" target="_blank" class="text-primary hover:underline">zenkai-bin</a>,
-            updated with the rest of your system by your AUR helper
+            or <a href="https://aur.archlinux.org/packages/zenkai" target="_blank" class="text-primary hover:underline">zenkai</a> to
+            build from source. Your AUR helper keeps it updated
           </p>
         </div>
         <CopyBlock

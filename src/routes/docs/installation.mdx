@@ -8,13 +8,20 @@ Install it from the AUR on Arch, grab a ready-made build from the [download sect
 
 ## Arch Linux (AUR)
 
-Zenkai is on the AUR as [zenkai-bin](https://aur.archlinux.org/packages/zenkai-bin), which packages the latest release. With an AUR helper:
+Zenkai is on the AUR in two packages:
+
+- [zenkai-bin](https://aur.archlinux.org/packages/zenkai-bin) installs the prebuilt binary from the latest release, so it takes seconds.
+- [zenkai](https://aur.archlinux.org/packages/zenkai) builds the latest release from source with Zig and runs the test suite.
+
+With an AUR helper:
 
 ```bash
 yay -S zenkai-bin
-# or
-paru -S zenkai-bin
+# or build from source
+yay -S zenkai
 ```
+
+`paru` works the same way. The two packages replace each other, so install one of them.
 
 Without a helper, build and install the package yourself:
 
