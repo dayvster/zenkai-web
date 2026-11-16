@@ -12,6 +12,7 @@ import { Keyboard } from "~/components/svgs/Keyboard";
 import { Calculator } from "~/components/svgs/Calculator";
 import { Bolt } from "~/components/svgs/Bolt";
 import { Globe } from "~/components/svgs/Globe";
+import Seo from "~/components/Seo";
 
 const features = [
   {
@@ -380,6 +381,7 @@ const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(
 export default function Features() {
   return (
     <MainLayout>
+      <Seo title="Features" description="Everything Zenkai does: fuzzy app search, window switching on Wayland and X11, file previews, a calculator, themes and Lua plugins." />
       <div class="px-4 sm:px-6 py-12 sm:py-20 max-w-7xl mx-auto">
         <div class="text-center mb-10">
           <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-4">

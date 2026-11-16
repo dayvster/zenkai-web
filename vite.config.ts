@@ -27,7 +27,10 @@ export default defineConfig({
     nitro({
       preset: "static",
       prerender: {
-        crawlLinks: true
+        crawlLinks: true,
+        // Crawling starts at the home page. Netlify serves 404.html, with a 404 status, for
+        // any URL that has no page.
+        routes: ["/", "/404.html"]
       }
     })
   ]
