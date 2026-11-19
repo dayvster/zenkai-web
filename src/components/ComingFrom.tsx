@@ -13,7 +13,7 @@ const alternatives = [
     pitch: "Apps, files, a calculator and window switching, plus snapping windows from the keyboard.",
   },
   {
-    from: "Rofi, Wofi or Fuzzel",
+    from: "Wofi or Fuzzel",
     platform: "Linux",
     pitch: "No scripts to glue together: windows, files, previews and actions work out of the box.",
   },

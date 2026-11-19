@@ -54,7 +54,7 @@ Every setting can be passed on the command line. Flags override [zenkai.conf](/d
 
 ### dmenu mode
 
-`--dmenu` turns Zenkai into a picker for scripts, like dmenu or `rofi -dmenu`:
+`--dmenu` turns Zenkai into a picker for scripts, like dmenu:
 
 ```bash
 git branch --format='%(refname:short)' | zenkai --dmenu --prompt="Branch" | xargs -r git switch
