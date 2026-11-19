@@ -10,6 +10,7 @@ const pages = [
   { label: "Usage", href: "/docs/usage", description: "Start Zenkai and use its search bar: apps, windows, files, math and more, plus launch modes and the actions menu." },
   { label: "Hotkey Setup", href: "/docs/hotkeys", description: "Bind Zenkai and its window switcher to a key in KDE Plasma, Hyprland, Sway, i3, GNOME, Windows and macOS." },
   { label: "Keyboard Shortcuts", href: "/docs/shortcuts", description: "Every keyboard shortcut in Zenkai, for using the launcher without a mouse." },
+  { label: "Background Service", href: "/docs/background-service", description: "Keep Zenkai running in the background so a hotkey shows it instantly, with clipboard history you can search, pin and copy back. Linux." },
   { label: "Window Switcher", href: "/docs/window-switcher", description: "Switch between open windows on KDE Plasma, Hyprland, Sway, X11, Windows and macOS, and snap them to halves, maximize or move them between displays." },
   { label: "Browser Extension", href: "/docs/browser", description: "Search and switch browser tabs, history and bookmarks from Zenkai, in Firefox and Chromium-based browsers like Chrome, Brave, Edge and Vivaldi." },
   { label: "Files & Previews", href: "/docs/files", description: "Browse folders, search filenames and preview files from Zenkai's search bar." },

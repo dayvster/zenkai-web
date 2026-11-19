@@ -1,0 +1,97 @@
+import DocsLayout from "~/layouts/DocsLayout";
+import { Table, Th, Td, TdDesc } from "~/components/Table";
+
+<DocsLayout>
+
+# Background Service
+
+By default every launch starts a new Zenkai, and that stays the default. If you'd rather keep it running, the background service is opt-in: Zenkai starts once with its window hidden, and a hotkey shows and hides it. The app list, plugins and icons stay loaded, so it opens without a startup, and it keeps your [clipboard history](#clipboard-history).
+
+The background service is available on Linux for now.
+
+## Turning it on
+
+Start the service once per session, then point your hotkey at `zenkai --toggle` instead of `zenkai`:
+
+```bash
+zenkai --service                     # start it, from your session's autostart
+zenkai --toggle                      # show or hide the launcher
+zenkai --toggle --window-switcher    # the window switcher, from the same service
+zenkai --toggle --clipboard-history  # straight into clipboard history
+zenkai --quit-service                # stop it
+```
+
+When no service is running, `--toggle` starts Zenkai the usual way, so the same binding works with or without it. Toggling the other mode while one is open switches over instead of closing.
+
+### Hyprland
+
+```ini
+exec-once = zenkai --service
+bind = SUPER, SPACE, exec, zenkai --toggle
+bind = ALT, TAB, exec, zenkai --toggle --window-switcher
+bind = SUPER, V, exec, zenkai --toggle --clipboard-history
+```
+
+With the Lua configuration:
+
+```lua
+hl.on("hyprland.start", function()
+	hl.exec_cmd("zenkai --service")
+end)
+hl.bind("SUPER + SPACE", hl.dsp.exec_cmd("zenkai --toggle"))
+hl.bind("SUPER + V", hl.dsp.exec_cmd("zenkai --toggle --clipboard-history"))
+```
+
+### Sway and i3
+
+```ini
+exec zenkai --service
+bindsym $mod+space exec zenkai --toggle
+bindsym $mod+v exec zenkai --toggle --clipboard-history
+```
+
+### KDE Plasma and GNOME
+
+Add `zenkai --service` to your autostart (**System Settings → Autostart** in Plasma, **Tweaks → Startup Applications** or a `.desktop` file in `~/.config/autostart` in GNOME), then bind `zenkai --toggle` as described in [Hotkey Setup](/docs/hotkeys).
+
+## How it behaves
+
+- Closing Zenkai (Escape, opening a result, clicking away) hides it. The next show starts from an empty search, like a fresh launch.
+- The service uses the flags on its own command line and your `zenkai.conf`. Flags after `--toggle` only pick the mode.
+- When `zenkai.conf` changes, for example after saving in the settings window, the service restarts itself the next time it's hidden, so new settings apply without stopping it by hand.
+- The app list refreshes in the background while the window is hidden, never while you're typing.
+
+## Clipboard history
+
+While the service runs, it keeps a history of the text you copy. Type `clip:` to search it, or bind `zenkai --toggle --clipboard-history` to open it directly.
+
+<Table>
+  <tr>
+    <Th>Key</Th>
+    <Th>Action</Th>
+  </tr>
+  <tr>
+    <Td>Enter</Td>
+    <TdDesc>Copy the entry back to the clipboard and close</TdDesc>
+  </tr>
+  <tr>
+    <Td>Ctrl+K</Td>
+    <TdDesc>Copy, Pin or Unpin, Delete, or Clear History (pinned entries stay)</TdDesc>
+  </tr>
+</Table>
+
+Pinned entries are listed first, then everything else, newest first. Copying something that's already in the history moves it back to the top.
+
+### What it needs
+
+- **Wayland:** `wl-paste` from wl-clipboard, and a compositor with the data-control protocol: Hyprland, Sway and KDE Plasma have it, GNOME doesn't.
+- **X11:** nothing extra.
+
+### Privacy
+
+- Copies that password managers mark as secret, such as from KeePassXC or KDE Wallet, are never recorded.
+- The history is saved to `~/.local/state/zenkai/clipboard-history.json`, readable only by you, and kept out of `~/.config` so it doesn't end up in a dotfiles repository.
+- It keeps the last 200 copies plus anything pinned, each up to 100 KB of text. Images and other non-text copies aren't recorded.
+- To turn it off, disable the `clipboard` plugin on the Plugins page of the settings window, or add it to `disabled_plugins` in `zenkai.conf`. The service then doesn't watch the clipboard at all.
+
+</DocsLayout>
