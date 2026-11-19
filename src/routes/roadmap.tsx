@@ -17,8 +17,28 @@ type Section = {
 
 const roadmap: Section[] = [
   {
-    section: "v1.6 (released)",
+    section: "v1.7 (released)",
     intro: "Out now: download it from the home page or install it from the AUR.",
+    items: [
+      {
+        title: "Optional background service with a toggle command",
+        desc: "Zenkai starts a new process on every launch, and that stays the default. Anyone who wants it can opt into a resident service (zenkai --service) that a hotkey shows and hides (zenkai --toggle): it opens without a startup and keeps the app list and plugins loaded. Linux first.",
+        done: true,
+      },
+      {
+        title: "Clipboard history",
+        desc: "Search, pin and copy back past copies with clip:. Needs the background service; passwords marked secret by password managers are never recorded.",
+        done: true,
+      },
+      {
+        title: "dmenu mode",
+        desc: "Read entries from stdin and print the chosen one, so scripts can use Zenkai as a picker (--dmenu, --prompt).",
+        done: true,
+      },
+    ],
+  },
+  {
+    section: "v1.6",
     items: [
       {
         title: "Settings window",
@@ -40,20 +60,12 @@ const roadmap: Section[] = [
     section: "Up next",
     items: [
       {
-        title: "Optional background service with a toggle command",
-        desc: "Zenkai starts a new process on every launch, and that stays the default. Anyone who wants it can opt into a resident service that a hotkey shows and hides: it opens instantly and keeps the app cache, the window list and plugin state warm. Clipboard history and per-command hotkeys build on it, so they only work with the service turned on.",
-      },
-      {
-        title: "Clipboard history",
-        desc: "Search, pin and paste past copies. Needs the optional background service to watch the clipboard.",
-      },
-      {
         title: "System commands",
         desc: "Lock, sleep, log out, restart, shut down and empty trash in the main search, for every desktop. Today only the Hyprland plugin has lock and sleep.",
       },
       {
-        title: "dmenu mode",
-        desc: "Read entries from stdin and print the chosen one, so scripts can use Zenkai as a picker.",
+        title: "Paste from clipboard history",
+        desc: "Paste a past copy straight into the window you came from, instead of copying it back first.",
       },
     ],
   },
