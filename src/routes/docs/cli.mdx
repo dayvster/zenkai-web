@@ -31,6 +31,16 @@ Every setting can be passed on the command line. Flags override [zenkai.conf](/d
     <TdDesc>Windows only: open Run mode and run the typed command or URL</TdDesc>
   </tr>
   <tr>
+    <Td>--dmenu</Td>
+    <Td>-</Td>
+    <TdDesc>Pick from the lines on stdin and print the choice, or the typed text when nothing matches. Escape exits with status 1</TdDesc>
+  </tr>
+  <tr>
+    <Td>--prompt</Td>
+    <Td>text</Td>
+    <TdDesc>Placeholder text for the search field, e.g. `--dmenu --prompt="Branch"`</TdDesc>
+  </tr>
+  <tr>
     <Td>--no-dapps</Td>
     <Td>-</Td>
     <TdDesc>Skip app scanning (for plugin-only or `--menu` setups)</TdDesc>
@@ -39,6 +49,48 @@ Every setting can be passed on the command line. Flags override [zenkai.conf](/d
     <Td>--menu</Td>
     <Td>name|cmd|icon</Td>
     <TdDesc>Add a custom entry. Repeatable. Skips app scanning</TdDesc>
+  </tr>
+</Table>
+
+### dmenu mode
+
+`--dmenu` turns Zenkai into a picker for scripts, like dmenu or `rofi -dmenu`:
+
+```bash
+git branch --format='%(refname:short)' | zenkai --dmenu --prompt="Branch" | xargs -r git switch
+```
+
+Entries keep their order and blank lines are skipped. Apps, plugins and window search stay out of the list, and picks don't affect app ranking.
+
+## Background service
+
+Linux only. See [Background Service](/docs/background-service).
+
+<Table>
+  <tr>
+    <Th>Flag</Th>
+    <Th>Value</Th>
+    <Th>Description</Th>
+  </tr>
+  <tr>
+    <Td>--service</Td>
+    <Td>-</Td>
+    <TdDesc>Run in the background with the window hidden until `--toggle` shows it</TdDesc>
+  </tr>
+  <tr>
+    <Td>--toggle</Td>
+    <Td>-</Td>
+    <TdDesc>Show or hide the service's launcher; starts Zenkai normally when no service is running</TdDesc>
+  </tr>
+  <tr>
+    <Td>--clipboard-history</Td>
+    <Td>-</Td>
+    <TdDesc>With `--toggle`: open the clipboard history</TdDesc>
+  </tr>
+  <tr>
+    <Td>--quit-service</Td>
+    <Td>-</Td>
+    <TdDesc>Stop the background service</TdDesc>
   </tr>
 </Table>
 
